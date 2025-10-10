@@ -1,0 +1,67 @@
+/* Algemene stijl */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f7f7f7;
+  color: #333;
+  text-align: center;
+}
+
+/* Header */
+header {
+  background: #222;
+  color: white;
+  padding: 15px;
+}
+
+header nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+header nav a:hover {
+  color: #f0a500;
+}
+
+/* Hero sectie */
+.boeken {
+  background: #555;
+  color: white;
+  padding: 80px 20px;
+}
+
+.btn {
+  display: inline-block;
+  background: #f0a500;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  margin-top: 15px;
+}
+
+.btn:hover {
+  background: #d18e00;
+}
+
+/* Diensten */
+.services {
+  padding: 50px 20px;
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  margin: 10px auto;
+  width: 250px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Footer */
+footer {
+  background: #222;
+  color: white;
+  padding: 20px;
+}
