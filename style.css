@@ -30,12 +30,12 @@ header nav a {
 
 /* Midden sectie */
 .midden {
- background-image:url(afbeeldingen/image.png) ;
+ background-image:url(image.png) ;
  background-size: cover;
  background-position: center;
   color: #ffffff;
   padding: 100px 20px;
-  min-height: 60vh;
+  min-height: 50px;
 }
 
 .midden h1 {
@@ -57,6 +57,34 @@ header nav a {
   text-decoration: none;
   border-radius: 5px;
   transition: background 0.3s;
+}
+
+.midden2{
+  padding: 100px 20px;
+ color:  #b32929;
+
+
+}
+
+.midden2 h2{
+  padding-right: 800px;
+  color:  #000000;
+    font-size: 30px;
+ 
+}
+
+.midden2 h1{
+
+  padding-right: 800px ;
+   color: #000000; 
+     font-size: 50px;
+}
+
+.midden2 h3{
+
+   color:  #000000; 
+     padding-right: 800px;
+     bottom: 500px;
 }
 
 
@@ -85,7 +113,7 @@ footer p {
 
 
 
-/* Responsiveness */
+/* Responsiveness midden */
 @media (max-width: 768px) {
   header nav {
     flex-direction: column;
@@ -100,3 +128,18 @@ footer p {
     font-size: 2em;
   }
 }
+
+
+
+/* Responsiveness midden2 */
+@media (max-width: 768px) {
+  .midden2 {
+    padding: 50px 15px;
+  }
+
+  .midden2 h1, .midden2 h2, .midden2 h3 {
+    padding-right: 0;
+    text-align: center;
+  }
+}
+
