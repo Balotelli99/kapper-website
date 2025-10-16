@@ -3,15 +3,14 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: #fff; /* wit als basis */
+  background: #fff;
   color: #333;
-  text-align: center;
 }
 
-/* Header */
 header {
   background: #ffffff;
-  padding: 40px 20px;
+  padding: 30px 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 header nav {
@@ -30,12 +29,12 @@ header nav a {
 
 /* Midden sectie */
 .midden {
- background-image:url(image.png) ;
- background-size: cover;
- background-position: center;
+  background-image: url('image.png');
+  background-size: cover;
+  background-position: center;
   color: #ffffff;
   padding: 100px 20px;
-  min-height: 50px;
+  text-align: center;
 }
 
 .midden h1 {
@@ -48,10 +47,9 @@ header nav a {
   margin-bottom: 30px;
 }
 
-
 .button {
   display: inline-block;
-  background: #c5a572; /* licht bruin */
+  background: #c5a572;
   color: white;
   padding: 12px 25px;
   text-decoration: none;
@@ -59,47 +57,10 @@ header nav a {
   transition: background 0.3s;
 }
 
-.midden2{
-  padding: 100px 20px;
- color:  #b32929;
 
 
-}
-
-.midden2 h2{
-  padding-right: 800px;
-  color:  #000000;
-    font-size: 30px;
- 
-}
-
-.midden2 h1{
-
-  padding-right: 800px ;
-   color: #000000; 
-     font-size: 50px;
-}
-
-.midden2 h3{
-
-   color:  #000000; 
-     padding-right: 800px;
-     bottom: 500px;
-}
 
 
-.behandelingen {
-  padding: 80px 20px;
-  background: #f5f5f5;
-  color: #333;
-  text-align: center;
-}
-
-.behandelingen h1 {
-  font-size: 40px;
-  margin-bottom: 50px;
-  color: #000000;
-}
 
 .behandelingen-container {
   display: flex;
@@ -108,43 +69,54 @@ header nav a {
   gap: 30px;
 }
 
-.behandeling {
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
-  width: 250px;
+.behandelingen {
+  padding: 10px 10px;
+  background: #f9f9f9;
   text-align: center;
-  color: #000;
 }
 
+.behandeling {
+  background: #ffffff;
+  padding: 80px;
+  width: 280px;
+  text-align: left;
+  color: #000;
+
+}
+
+.behandelingen h1 {
+  font-size: 40px;
+  margin-bottom: 50px;
+  color: #000000;
+}
+
+
 .behandeling h2 {
+  color: #000000;
   margin-bottom: 10px;
-  color: #c5a572;
+  font-size: 22px;
 }
 
 .behandeling p {
   font-size: 16px;
-  line-height: 1.4;
+  line-height: 1.5;
+  margin-bottom: 10px;
 }
 
-/* Responsiveness */
-@media (max-width: 768px) {
-  .behandelingen {
-    padding: 50px 15px;
-  }
-
-  .behandeling {
-    width: 80%;
-    margin-bottom: 20px;
-  }
-
-  .behandelingen h1 {
-    font-size: 30px;
-  }
+.behandeling .prijs {
+  font-weight: bold;
+  color: #000000;
+  font-size: 18px;
+  margin-bottom: 15px;
 }
 
+.behandeling .button {
+  text-align: center;
+  display: block;
+  margin-top: 10px;
+}
 
-
+/* Footer */
 footer {
   background: #c5a572;
   color: #fff;
@@ -163,38 +135,23 @@ footer p {
   font-size: 18px;
 }
 
-
-
-
-
-
-/* Responsiveness midden */
+/* Responsiveness */
 @media (max-width: 768px) {
   header nav {
     flex-direction: column;
     gap: 15px;
   }
-
   .midden {
     padding: 80px 15px;
   }
-
   .midden h1 {
     font-size: 2em;
   }
-}
-
-
-
-/* Responsiveness midden2 */
-@media (max-width: 768px) {
-  .midden2 {
-    padding: 50px 15px;
+  .behandelingen-container {
+    flex-direction: column;
+    align-items: center;
   }
-
-  .midden2 h1, .midden2 h2, .midden2 h3 {
-    padding-right: 0;
-    text-align: center;
+  .behandeling {
+    width: 90%;
   }
 }
-
