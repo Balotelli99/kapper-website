@@ -59,6 +59,75 @@ header nav a {
 
 
 
+/* Over ons sectie */
+.midden2 {
+  background: #f9f9f9;
+  padding: 60px 20px;
+  text-align: center;
+  color: #333;
+}
+
+.midden2 h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.midden2 h2 {
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.midden2 h3 {
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+  color: #333;
+}
+
+/* Foto's in Over ons sectie */
+.midden2-fotos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.midden2-fotos img {
+  width: 250px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.midden2-fotos img:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive voor mobiel */
+@media (max-width: 768px) {
+  .midden2 h1 {
+    font-size: 28px;
+  }
+  .midden2 h2 {
+    font-size: 20px;
+  }
+  .midden2 h3 {
+    font-size: 16px;
+  }
+  .midden2-fotos {
+    flex-direction: column;
+    align-items: center;
+  }
+  .midden2-fotos img {
+    width: 80%;
+  }
+}
+
+
 
 
 
@@ -152,6 +221,57 @@ header nav a {
   margin-left: 30px;
 }
 
+
+
+
+
+/* Reviews sectie */
+.reviews {
+  background: #fff7e6;
+  padding: 60px 20px;
+  text-align: center;
+  color: #333;
+}
+
+.reviews h1 {
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: #000;
+}
+
+.reviews-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.review {
+  background: #ffffff;
+  padding: 30px 20px;
+  width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+}
+
+.review h3 {
+  margin-top: 15px;
+  font-weight: bold;
+  font-style: normal;
+  color: #c5a572;
+}
+
+/* Responsive voor mobiel */
+@media (max-width: 768px) {
+  .reviews-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .review {
+    width: 90%;
+  }
+}
 
 
 /* Footer */
