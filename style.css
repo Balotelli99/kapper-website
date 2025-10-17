@@ -116,6 +116,44 @@ header nav a {
   margin-top: 10px;
 }
 
+
+
+
+.team-container{
+  object-fit: cover;
+    display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.team{
+
+    padding: center;
+  background: #f9f9f9;
+  text-align: center;
+}
+
+.ronaldo-foto {
+  width: 200px;
+  height: auto;
+}
+
+.Neymar-foto{
+    width: 200px;
+  height: auto;
+  margin-left: 30px;
+}
+
+.corleone-foto{
+
+    width: 200px;
+  height: auto;
+  margin-left: 30px;
+}
+
+
+
 /* Footer */
 footer {
   background: #c5a572;
