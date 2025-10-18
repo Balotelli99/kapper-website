@@ -1,14 +1,21 @@
 <?php
-$servername = "localhost";
-$username = "username";
-$password = "password";
+$host = 'localhost';
+$db   = 'kapperzaak';
+$user = 'root';       // standaard bij XAMPP of Laragon
+$pass = '';           // laat leeg tenzij je een wachtwoord hebt ingesteld
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+
+$options = [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES => false,
+];
 
 try {
-  $conn = new PDO("mysql:host=$servername;dbname=kapperzaak", $username, $password);
-  // set the PDO error mode to exception
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  echo "Connected successfully";
-} catch(PDOException $e) {
-  echo "Connection failed: " . $e->getMessage();
+    $pdo = new PDO($dsn, $user, $pass, $options);
+} catch (PDOException $e) {
+    die("Database verbinding mislukt: " . $e->getMessage());
 }
 ?>
