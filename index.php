@@ -58,21 +58,21 @@
       <h2>Knippen</h2>
       <p>Professioneel knippen voor dames, heren en kinderen.</p>
       <p class="prijs">Prijs: €25,00</p>
-      <a href="afspraak.html" class="button">Maak Afspraak</a>
+  <a href="behandelingen.php?id=1" class="button">Maak Afspraak</a>
     </div>
 
     <div class="behandeling">
       <h2>Kleuren</h2>
       <p>Highlights, balayage of volledige kleuringen.</p>
       <p class="prijs">Prijs: €20,00</p>
-      <a href="afspraak.html" class="button">Maak Afspraak</a>
+      <a href="behandelingen.php?id=2" class="button">Maak Afspraak</a>
     </div>
 
     <div class="behandeling">
       <h2>Baard Treatment</h2>
       <p>Dagelijkse styling of speciale behandelingen voor baarden.</p>
       <p class="prijs">Prijs: €15,00</p>
-      <a href="afspraak.html" class="button">Maak Afspraak</a>
+      <a href="behandelingen.php?id=3" class="button">Maak Afspraak</a>
     </div>
 
   </div>
@@ -152,3 +152,5 @@
 
 </body>
 </html>
+
+
