@@ -86,21 +86,21 @@
       <h2>Ronaldo</h2>
   <img src="afbeeldingen/image.png" alt="De kapper Ronaldo" class="ronaldo-foto">
       <h2>De Kapper & Eigenaar</h2>
-      <a href="team.html" class="button">Info over Ronaldo</a>
+     <a href="team.php?id=1" class="button">info over Ronaldo</a>
     </div>
 
     <div class="Neymar ">
       <h2>Neymar</h2>
   <img src="afbeeldingen/image copy.png" alt="De Kleuren stylist Neymar jr" class="Neymar-foto">
       <h2>De Kleuren stylist</h2>
-      <a href="team.html" class="button">Info over Neymar</a>
+     <a href="team.php?id=2" class="button">info over Neymar</a>
     </div>
 
       <div class="Corleone ">
       <h2>Corleone</h2>
   <img src="afbeeldingen/image copy 2.png" alt="De Barbier" class="corleone-foto">
       <h2>De Barbier </h2>
-      <a href="team.html" class="button">Info over Corleone</a>
+ <a href="team.php?id=3" class="button">info over Corleone </a>
     </div>
   </div>
   </main>
