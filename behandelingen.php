@@ -1,6 +1,6 @@
 <?php
 // Verbinding met database
-$conn = new mysqli("localhost", "root", "", "kapperwebsite");
+$conn = new mysqli("localhost", "root", "", "kapperwebshop");
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -26,7 +26,7 @@ if($result->num_rows > 0){
 }
 ?>
 <?php
-$conn = new mysqli("localhost","root","","kapperwebsite");
+$conn = new mysqli("localhost","root","","kapperwebshop");
 $sql = "SELECT * FROM behandelingen";
 $result = $conn->query($sql);
 

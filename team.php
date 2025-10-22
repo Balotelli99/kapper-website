@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli("localhost","root","","kapperwebsite");
+$conn = new mysqli("localhost","root","","kapperwebshop");
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 

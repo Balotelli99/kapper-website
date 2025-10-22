@@ -15,7 +15,7 @@ if(isset($_POST['login'])){
         $user = $result->fetch_assoc();
         if(password_verify($password, $user['password'])){
             $_SESSION['user_id'] = $user['id'];
-            header("Location: dashboard.php");
+            header("Location: dashboard.php"); // Hier kun je een dashboard maken
             exit;
         } else {
             $error = "Wachtwoord fout!";
@@ -26,10 +26,11 @@ if(isset($_POST['login'])){
 }
 ?>
 
-<h2>Admin Login</h2>
+<h2>Login</h2>
 <form method="POST">
     <input type="text" name="username" placeholder="Username" required>
     <input type="password" name="password" placeholder="Password" required>
     <button type="submit" name="login">Login</button>
 </form>
+
 <?php if(isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
