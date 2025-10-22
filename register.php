@@ -2,27 +2,19 @@
 session_start();
 include 'db_connect.php';
 
-if(isset($_POST['register'])){
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = trim($_POST['username']);
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    // Controleer of gebruiker al bestaat
-    $stmt = $conn->prepare("SELECT * FROM users WHERE username=? LIMIT 1");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if($result->num_rows > 0){
-        $error = "Gebruikersnaam bestaat al!";
+    // Controleer of gebruiker bestaat
+    $check = $conn->query("SELECT * FROM users WHERE username='$username'");
+    if ($check->num_rows > 0) {
+        $message = "<p style='color:red;'>Gebruikersnaam bestaat al!</p>";
     } else {
-        // Voeg nieuwe gebruiker toe aan database
-        $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
-        $stmt->bind_param("ss", $username, $hashed_password);
-        if($stmt->execute()){
-            $success = "Gebruiker succesvol geregistreerd!";
+        if ($conn->query("INSERT INTO users (username, password) VALUES ('$username', '$password')")) {
+            $message = "<p style='color:green;'>Gebruiker succesvol geregistreerd!</p>";
         } else {
-            $error = "Fout bij registreren!";
+            $message = "<p style='color:red;'>Fout bij registreren!</p>";
         }
     }
 }
@@ -30,12 +22,9 @@ if(isset($_POST['register'])){
 
 <h2>Registreren</h2>
 <form method="POST">
-    <input type="text" name="username" placeholder="Username" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <button type="submit" name="register">Register</button>
+    <input type="text" name="username" placeholder="Gebruikersnaam" required>
+    <input type="password" name="password" placeholder="Wachtwoord" required>
+    <button type="submit">Register</button>
 </form>
 
-<?php 
-if(isset($error)) echo "<p style='color:red;'>$error</p>"; 
-if(isset($success)) echo "<p style='color:green;'>$success</p>"; 
-?>
+<?= $message ?? '' ?>

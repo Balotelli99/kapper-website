@@ -10,25 +10,28 @@ $message = '';
 
 if(isset($_POST['opslaan'])){
     $naam = $_POST['naam'];
+    $functie = $_POST['functie'];
     $beschrijving = $_POST['beschrijving'];
-    $prijs = $_POST['prijs'];
 
-    $stmt = $conn->prepare("INSERT INTO behandelingen (naam, beschrijving, prijs) VALUES (?,?,?)");
-    $stmt->bind_param("ssd", $naam, $beschrijving, $prijs);
+    // Corrected SQL statement
+    $stmt = $conn->prepare("INSERT INTO team (naam, functie, beschrijving) VALUES (?,?,?)");
+    $stmt->bind_param("sss", $naam, $functie, $beschrijving);
 
     if($stmt->execute()){
-        $message = "<p style='color:green;'>Behandeling toegevoegd!</p>";
+        $message = "<p style='color:green;'>Teamlid toegevoegd!</p>";
     } else {
         $message = "<p style='color:red;'>Fout bij toevoegen!</p>";
     }
 }
 ?>
 
-<h2>Nieuwe Behandeling Toevoegen</h2>
+
+<h2>Nieuw teamlid Toevoegen</h2>
 <form method="POST">
     <input type="text" name="naam" placeholder="Naam" required><br>
+    <input type="text" name="functie" placeholder="Functie" required><br>
     <textarea name="beschrijving" placeholder="Beschrijving" required></textarea><br>
-    <input type="number" step="0.01" name="prijs" placeholder="Prijs" required><br>
+ 
     <button type="submit" name="opslaan">Opslaan</button>
 </form>
 
