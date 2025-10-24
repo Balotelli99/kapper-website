@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username']);
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    // Controleer of gebruiker bestaat
+   
     $check = $conn->query("SELECT * FROM users WHERE username='$username'");
     if ($check->num_rows > 0) {
         $message = "<p style='color:red;'>Gebruikersnaam bestaat al!</p>";

@@ -7,7 +7,7 @@ if(!isset($_SESSION['user_id'])) {
 
 include 'db_connect.php';
 
-// Haal ID op van URL
+
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 // Haal gegevens van teamlid op
@@ -16,7 +16,7 @@ $row = $result->fetch_assoc();
 
 $message = "";
 
-// Check of formulier is verzonden
+
 if(isset($_POST['opslaan'])) {
     $naam = $_POST['naam'];
     $functie = $_POST['functie'];
