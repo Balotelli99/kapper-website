@@ -19,6 +19,8 @@ $result = $conn->query("SELECT * FROM behandelingen ORDER BY id ASC");
 <body>
 <h1>Behandelingen Overzicht</h1>
 <a href="voeg_behandeling_toe.php">Nieuwe Behandeling Toevoegen</a>
+<link rel="stylesheet" href="behandelingen.css">
+
 
 <table border="1" cellpadding="10">
     <tr>

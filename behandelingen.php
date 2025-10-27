@@ -8,9 +8,9 @@ if ($conn->connect_error) {
 
 
 if (isset($_GET['id'])) {
-    $id = (int)$_GET['id']; // haal id uit URL en maak er een getal van
+    $id = (int)$_GET['id']; 
 } else {
-    $id = 0; // standaardwaarde als id niet bestaat
+    $id = 0;
 }
 
 
