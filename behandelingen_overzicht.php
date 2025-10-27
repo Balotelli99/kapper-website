@@ -15,11 +15,12 @@ $result = $conn->query("SELECT * FROM behandelingen ORDER BY id ASC");
 <head>
     <meta charset="UTF-8">
     <title>Behandelingen Overzicht</title>
+    <link rel="stylesheet" href="behandeloverzicht.css">
 </head>
 <body>
 <h1>Behandelingen Overzicht</h1>
 <a href="voeg_behandeling_toe.php">Nieuwe Behandeling Toevoegen</a>
-<link rel="stylesheet" href="behandelingen.css">
+
 
 
 <table border="1" cellpadding="10">

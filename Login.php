@@ -15,7 +15,7 @@ if(isset($_POST['login'])){
         $user = $result->fetch_assoc();
         if(password_verify($password, $user['password'])){
             $_SESSION['user_id'] = $user['id'];
-            header("Location: dashboard.php"); // Hier kun je een dashboard maken
+            header("Location: behandelingen_overzicht.php"); // Hier kun je een dashboard maken
             exit;
         } else {
             $error = "Wachtwoord fout!";
