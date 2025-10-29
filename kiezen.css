@@ -1,0 +1,118 @@
+/* Algemene instellingen */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f8f4e3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 2rem 1rem;
+    color: #333;
+}
+
+/* Titel */
+h1 {
+    color: #735c08;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* Navigatie-links (nu knoppen) */
+a {
+    display: inline-block;
+    background: linear-gradient(135deg, #a37a0f, #735c08);
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 8px 25px 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(115, 92, 8, 0.3);
+}
+
+a:hover {
+    background: linear-gradient(135deg, #c9981b, #8a6c0a);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(115, 92, 8, 0.4);
+}
+
+/* Behandeling / review kaart */
+.behandeling {
+    background: #fff;
+    padding: 2rem 2.2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+    max-width: 480px;
+    margin: 1rem 0;
+    text-align: center;
+    position: relative;
+    animation: fadeIn 0.6s ease-out;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.behandeling:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(115, 92, 8, 0.25);
+}
+
+/* Tekst in de behandeling */
+.behandeling p {
+    font-size: 17px;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 1.2rem;
+    font-style: italic;
+}
+
+.behandeling h3 {
+    font-size: 16px;
+    color: #735c08;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Accentlijn bovenaan de kaart */
+.behandeling::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(135deg, #a37a0f, #735c08);
+}
+
+/* Animatie bij laden */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsief ontwerp */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    a {
+        font-size: 14px;
+        padding: 10px 16px;
+    }
+
+    .behandeling {
+        padding: 1.5rem;
+    }
+
+    .behandeling p {
+        font-size: 15px;
+    }
+}

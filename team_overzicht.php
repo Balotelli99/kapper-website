@@ -18,7 +18,7 @@ $result = $conn->query("SELECT * FROM team ORDER BY id ASC");
 </head>
 <body>
 <h1>Team Overzicht</h1>
-<a href="voeg_team_toe.php">Nieuw Teamlid Toevoegen</a>
+
 
 <table border="1" cellpadding="10">
     <tr>

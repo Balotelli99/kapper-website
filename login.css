@@ -1,0 +1,94 @@
+/* Algemene instellingen */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #735c08, #ffffff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Login container */
+form {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+}
+
+/* Titel */
+h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+/* Invoervelden */
+input[type="text"],
+input[type="password"] {
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    border-color: #2575fc;
+    box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
+    outline: none;
+}
+
+/* Login-knop */
+button {
+    background: #2575fc;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #1a5ed8;
+}
+
+/* Link voor nieuw team */
+a {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #2575fc;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #6a11cb;
+}
+
+/* Foutmelding */
+p {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Responsief ontwerp */
+@media (max-width: 480px) {
+    form {
+        padding: 1.5rem;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+}
