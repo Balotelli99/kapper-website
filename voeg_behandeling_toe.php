@@ -23,6 +23,11 @@ if(isset($_POST['opslaan'])){
     }
 }
 ?>
+<head>
+  <meta charset="UTF-8">
+  <title>Team Overzicht</title>
+  <link rel="stylesheet" href="style/voegbehandeling.css">
+</head>
 
 <h2>Nieuwe Behandeling Toevoegen</h2>
 <form method="POST">
