@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Behandelingen Overzicht</title>
-    <link rel="stylesheet" href="kiezen.css">
+     <link rel="stylesheet" href="style/kiezen.css">
+                       
 </head>
 <body>
     <h1>Behandelingen / Team Overzicht</h1>

@@ -1,38 +1,34 @@
 <?php
-// Verbinding met database
-$conn = new mysqli("localhost", "root", "", "kapperwebshop");
+$conn = new mysqli("localhost","root","","kapperwebshop");
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-
-if (isset($_GET['id'])) {
-    $id = (int)$_GET['id']; 
-} else {
-    $id = 0;
-}
-
-
-
-$sql = "SELECT * FROM behandelingen WHERE id=$id";
+$sql = "SELECT * FROM team WHERE id=$id";
 $result = $conn->query($sql);
 
-if($result->num_rows > 0){
-    $row = $result->fetch_assoc();
-    echo "<h1>" . $row['naam'] . "</h1>";
-    echo "<p>" . $row['beschrijving'] . "</p>";
-    echo "<p>Prijs: €" . $row['prijs'] . "</p>";
-    if($row['afbeelding']) {
-        echo "<img src='" . $row['afbeelding'] . "' alt='" . $row['naam'] . "'>";
-    }
-} else {
-    echo "Behandeling niet gevonden.";
+
+// Afspraak met behandelingen van dit teamlid
+$sql2 = "SELECT * FROM behandelingen";
+$res2 = $conn->query($sql2);
+if($res2->num_rows > 0){
+   
+    
+
+    echo "</select>";
+    echo "<input type='text' name='naam' placeholder='Jouw naam' required>";
+    echo "<input type='email' name='email' placeholder='Jouw email' required>";
+    echo "<input type='datetime-local' name='datum' required>";
+    echo "<input type='submit' name='afspraak' value='Afspraak maken'>";
+    echo "</form>";
 }
 
-
-
-
-
-
-
+if(isset($_POST['afspraak'])){
+    $behandeling_id = $_POST['behandeling_id'];
+    $naam = $_POST['naam'];
+    $email = $_POST['email'];
+    $datum = $_POST['datum'];
+    $stmt = $conn->prepare("INSERT INTO afspraken (behandeling_id, team_id, naam, email, datum) VALUES (?,?,?,?,?)");
+    $stmt->bind_param("iisss",$behandeling_id, $id, $naam, $email, $datum);
+    $stmt->execute();
+    echo "<p>Afspraak succesvol!</p>";
+}

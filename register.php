@@ -13,12 +13,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         if ($conn->query("INSERT INTO users (username, password) VALUES ('$username', '$password')")) {
             $message = "<p style='color:green;'>Gebruiker succesvol geregistreerd!</p>";
+               header("Location: login.php"); // Hier kun je een kiezen
         } else {
             $message = "<p style='color:red;'>Fout bij registreren!</p>";
         }
     }
 }
 ?>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>Team Overzicht</title>
+  <link rel="stylesheet" href="style/registeren.css">
+</head>
 
 <h2>Registreren</h2>
 <form method="POST">
