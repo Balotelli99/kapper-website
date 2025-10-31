@@ -1,153 +1,102 @@
-/* Algemene stijl */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 40px;
-  background: #fff;
-  color: #333;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
 }
 
-/* Pagina titel */
 h1 {
-  text-align: center;
-  font-size: 38px;
-  color: #000;
-  margin-bottom: 50px;
+    text-align: center;
+    color: #735c08;
+    margin-bottom: 20px;
 }
 
-/* Knop 'Nieuwe Behandeling Toevoegen' */
-.top-link {
-  display: inline-block;
-  background: #c5a572;
-  color: #fff;
-  padding: 12px 25px;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  transition: background 0.3s ease;
-  margin-bottom: 30px;
+.toevoegen-btn {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 8px 16px;
+    background-color: #735c08;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
 }
 
-.top-link:hover {
-  background: #b08d56;
+.toevoegen-btn:hover {
+    background-color: #a37a0f;
 }
 
-/* Container rond tabel */
-.table-container {
-  background: #f9f9f9;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Tabel */
 table {
-  width: 100%;
-  border-collapse: collapse;
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
 }
 
 th, td {
-  padding: 16px 18px;
-  text-align: left;
-  border-bottom: 1px solid #eee;
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
 th {
-  background-color: #c5a572;
-  color: #fff;
-  font-size: 16px;
-  font-weight: bold;
-  letter-spacing: 0.4px;
+    background-color: #735c08;
+    color: #fff;
+    font-weight: 600;
 }
 
 tr:hover {
-  background-color: #fff7e6;
-  transition: background 0.2s ease;
+    background-color: #f9f9f9;
 }
 
-td {
-  vertical-align: middle;
-}
-
-/* Afbeeldingen */
 img {
-  border-radius: 6px;
-  width: 80px;
-  height: auto;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    max-width: 80px;
+    height: auto;
 }
 
-/* Actieknoppen */
-.actions a {
-  display: inline-block;
-  padding: 8px 12px;
-  border-radius: 6px;
-  color: #fff;
-  font-size: 14px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background 0.3s ease;
-  margin-right: 6px;
-}
-
-.actions a.edit {
-  background: #c5a572;
-}
-
-.actions a.edit:hover {
-  background: #b08d56;
-}
-
-.actions a.delete {
-  background: #e63946;
-}
-
-.actions a.delete:hover {
-  background: #c91e2f;
-}
-
-/* Geen behandelingen gevonden */
-td[colspan="6"] {
-  text-align: center;
-  color: #777;
-  font-style: italic;
-  padding: 30px;
-}
-
-/* Responsief gedrag */
-@media (max-width: 768px) {
-  body {
-    padding: 20px;
-  }
-
-  .table-container {
-    padding: 20px;
-  }
-
-  table, tr, td, th {
-    display: block;
-    width: 100%;
-  }
-
-  th {
-    position: sticky;
-    top: 0;
-    background-color: #c5a572;
+td a {
+    display: inline-block;
+    margin-right: 8px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background-color: #735c08;
     color: #fff;
-  }
+    text-decoration: none;
+}
 
-  td {
-    border-bottom: 1px solid #eee;
-    padding: 12px;
-  }
+td a:hover {
+    background-color: #a37a0f;
+}
 
-  img {
-    width: 100%;
-    max-width: 120px;
-  }
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    tr {
+        margin-bottom: 15px;
+        border-bottom: 2px solid #ddd;
+    }
+
+    td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        font-weight: 600;
+        text-align: left;
+        color: #333;
+    }
+
+    th {
+        display: none;
+    }
 }

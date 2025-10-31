@@ -10,8 +10,8 @@
     <h1>Behandelingen / Team Overzicht</h1>
 
     <div>
-        <a href="behandelingen_overzicht.php">➕ Nieuwe Behandeling</a>
-        <a href="team_overzicht.php">👥 Nieuw Team</a>
+        <a href="behandelingen_overzicht.php"> Nieuwe Behandeling</a>
+        <a href="team_overzicht.php"> Nieuw Team</a>
     </div>
 
     <div class="behandeling">

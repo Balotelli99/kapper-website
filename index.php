@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kapsalon Perfect Cut</title>
+  <title>Sultan's hairstyles</title>
    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <header>
     <nav>
-      <a href="#">Afspraak</a>
+      <a href="afspraak.php">Afspraak</a>
       <a href="team.html">Het Team</a>
       <a href="#">Kosten</a>
       <a href="producten.html">Producten</a>
@@ -22,10 +22,8 @@
   <main class="midden">
     <h1>Welkom bij Kapsalon Perfect Cut</h1>
     <p>Waar stijl, verzorging en ontspanning samenkomen.</p>
-    <a href="afspraak.html" class="button">Maak een afspraak</a>
-    <p>DJWdjwdowjdohdvhwohowhwf
-      wpjpwjfpjpwggpw
-      wohwhhgow
+    <a href="afspraak.php" class="button">Maak een afspraak</a>
+    <p>
     </p>
   </main>
 

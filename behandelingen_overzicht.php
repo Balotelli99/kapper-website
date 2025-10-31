@@ -6,7 +6,6 @@ if(!isset($_SESSION['user_id'])) {
 }
 
 include 'db_connect.php';
-
 $result = $conn->query("SELECT * FROM behandelingen ORDER BY id ASC");
 ?>
 
@@ -15,49 +14,47 @@ $result = $conn->query("SELECT * FROM behandelingen ORDER BY id ASC");
 <head>
     <meta charset="UTF-8">
     <title>Behandelingen Overzicht</title>
-    <link rel="stylesheet" href="behandeloverzicht.css">
+    <link rel="stylesheet" href="style/behandeloverzicht.css">
 </head>
 <body>
-<h1>Behandelingen Overzicht</h1>
-<a href="voeg_behandeling_toe.php">Nieuwe Behandeling Toevoegen</a>
+    <h1>Behandelingen Overzicht</h1>
+    <a href="voeg_behandeling_toe.php" class="toevoegen-btn">Nieuwe Behandeling Toevoegen</a>
 
-
-
-<table border="1" cellpadding="10">
-    <tr>
-        <th>ID</th>
-        <th>Naam</th>
-        <th>Beschrijving</th>
-        <th>Prijs</th>
-        <th>Foto</th>
-        <th>Acties</th>
-    </tr>
-
-    <?php if ($result->num_rows > 0) { ?>
-        <?php while($row = $result->fetch_assoc()) { ?>
-            <tr>
-                <td><?php echo $row['id']; ?></td>
-                <td><?php echo $row['naam']; ?></td>
-                <td><?php echo $row['beschrijving']; ?></td>
-                <td>€<?php echo $row['prijs']; ?></td>
-                <td>
-                    <?php if($row['afbeelding'] != "") { ?>
-                        <img src="<?php echo $row['afbeelding']; ?>" width="80">
-                    <?php } else { ?>
-                        Geen foto
-                    <?php } ?>
-                </td>
-                <td>
-                    <a href="bewerken_behandeling.php?id=<?php echo $row['id']; ?>">Bewerken</a> |
-                    <a href="verwijder_behandeling.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Weet je het zeker?')">Verwijderen</a>
-                </td>
-            </tr>
-        <?php } ?>
-    <?php } else { ?>
+    <table>
         <tr>
-            <td colspan="6">Geen behandelingen gevonden.</td>
+            <th>ID</th>
+            <th>Naam</th>
+            <th>Beschrijving</th>
+            <th>Prijs</th>
+            <th>Foto</th>
+            <th>Acties</th>
         </tr>
-    <?php } ?>
-</table>
+
+        <?php if ($result->num_rows > 0): ?>
+            <?php while($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td data-label="ID"><?= $row['id'] ?></td>
+                    <td data-label="Naam"><?= htmlspecialchars($row['naam']) ?></td>
+                    <td data-label="Beschrijving"><?= htmlspecialchars($row['beschrijving']) ?></td>
+                    <td data-label="Prijs">€<?= htmlspecialchars($row['prijs']) ?></td>
+                    <td data-label="Foto">
+                        <?php if($row['afbeelding']): ?>
+                            <img src="<?= htmlspecialchars($row['afbeelding']) ?>" alt="Foto van <?= htmlspecialchars($row['naam']) ?>">
+                        <?php else: ?>
+                            Geen foto
+                        <?php endif; ?>
+                    </td>
+                    <td data-label="Acties">
+                        <a href="bewerken_behandeling.php?id=<?= $row['id'] ?>">Bewerken</a>
+                        <a href="verwijder_behandeling.php?id=<?= $row['id'] ?>" onclick="return confirm('Weet je het zeker?')">Verwijderen</a>
+                    </td>
+                </tr>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <tr>
+                <td colspan="6">Geen behandelingen gevonden.</td>
+            </tr>
+        <?php endif; ?>
+    </table>
 </body>
 </html>
