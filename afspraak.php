@@ -28,7 +28,7 @@ if(isset($_POST['verstuur'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maak Afspraak - Sultan's Hairstyles</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="afspraak.css">
+    <link rel="stylesheet" href="style/afspraak.css">
 </head>
 <body>
 

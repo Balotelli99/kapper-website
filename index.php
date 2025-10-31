@@ -1,45 +1,44 @@
+<?php
+// Verbinding maken met de database
+include 'db_connect.php';
+
+// Behandelingen ophalen
+$behandelingen = $conn->query("SELECT * FROM behandelingen ORDER BY id ASC");
+?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sultan's hairstyles</title>
-   <link rel="stylesheet" href="style.css">
+  <title>Sultan's Hairstyles</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <header>
-    <nav>
-      <a href="afspraak.php">Afspraak</a>
-      <a href="team.html">Het Team</a>
-      <a href="#">Kosten</a>
-      <a href="producten.html">Producten</a>
-      <a href="#">Contact</a>
-    </nav>
-  </header>
+<header>
+  <nav>
+    <a href="afspraak.php">Afspraak</a>
+    <a href="team.html">Het Team</a>
+    <a href="#">Kosten</a>
+    <a href="producten.html">Producten</a>
+    <a href="#">Contact</a>
+  </nav>
+</header>
 
-
-  <main class="midden">
-    <h1>Welkom bij Kapsalon Perfect Cut</h1>
-    <p>Waar stijl, verzorging en ontspanning samenkomen.</p>
-    <a href="afspraak.php" class="button">Maak een afspraak</a>
-    <p>
-    </p>
-  </main>
-
-
+<main class="midden">
+  <h1>Welkom bij Kapsalon Perfect Cut</h1>
+  <p>Waar stijl, verzorging en ontspanning samenkomen.</p>
+  <a href="afspraak.php" class="button">Maak een afspraak</a>
+</main>
 
 <main class="midden2">
-  <h1>Over Sultan's hairstyles</h1>
-  <h2>Als je een goede kapper Utrecht zoekt.</h2>
-  <h3>
+  <h1>Over Sultan's Hairstyles</h1>
+  <h2>Als je een goede kapper in Utrecht zoekt</h2>
+  <p>
     Bij Sultan's Hairstyles geloven we dat goed verzorgd haar het verschil maakt. 
     Ons team van ervaren kappers combineert creativiteit en vakmanschap om jou elke dag 
-    een look te geven waar je zelfverzekerd mee de deur uitgaat. Of je nu komt voor een 
-    trendy kapsel, een perfecte kleuring of een complete verfrissing van je stijl, 
-    bij ons ben je in goede handen.
-  </h3>
-
+    een look te geven waar je zelfverzekerd mee de deur uitgaat.
+  </p>
   <div class="midden2-fotos">
     <img src="afbeeldingen/image copy 3.png" alt="Foto 1">
     <img src="afbeeldingen/image copy 4.png" alt="Foto 2">
@@ -47,64 +46,53 @@
   </div>
 </main>
 
- 
+<!-- Behandelingen sectie dynamisch -->
 <main class="behandelingen">
   <h1>Onze Behandelingen</h1>
   <div class="behandelingen-container">
-
-    <div class="behandeling">
-      <h2>Knippen</h2>
-      <p>Professioneel knippen voor dames, heren en kinderen.</p>
-      <p class="prijs">Prijs: €25,00</p>
-  <a href="behandelingen.php?id=1" class="button">Maak Afspraak</a>
-    </div>
-
-    <div class="behandeling">
-      <h2>Kleuren</h2>
-      <p>Highlights, balayage of volledige kleuringen.</p>
-      <p class="prijs">Prijs: €20,00</p>
-      <a href="behandelingen.php?id=2" class="button">Maak Afspraak</a>
-    </div>
-
-    <div class="behandeling">
-      <h2>Baard Treatment</h2>
-      <p>Dagelijkse styling of speciale behandelingen voor baarden.</p>
-      <p class="prijs">Prijs: €15,00</p>
-      <a href="behandelingen.php?id=3" class="button">Maak Afspraak</a>
-    </div>
-
+    <?php if($behandelingen->num_rows > 0): ?>
+      <?php while($row = $behandelingen->fetch_assoc()): ?>
+        <div class="behandeling">
+          <h2><?= htmlspecialchars($row['naam']) ?></h2>
+          <p><?= htmlspecialchars($row['beschrijving']) ?></p>
+          <p class="prijs">Prijs: €<?= htmlspecialchars($row['prijs']) ?></p>
+          <a href="behandelingen.php?id=<?= $row['id'] ?>" class="button">Maak Afspraak</a>
+        </div>
+      <?php endwhile; ?>
+    <?php else: ?>
+      <p>Geen behandelingen beschikbaar.</p>
+    <?php endif; ?>
   </div>
 </main>
 
 
-  <main class="team">
-    <h1> Het Team</h1>
+<main class="team">
+  <h1>Het Team</h1>
   <div class="team-container">
     <div class="Ronaldo">
       <h2>Ronaldo</h2>
-  <img src="afbeeldingen/image.png" alt="De kapper Ronaldo" class="ronaldo-foto">
+      <img src="afbeeldingen/image.png" alt="De kapper Ronaldo" class="ronaldo-foto">
       <h2>De Kapper & Eigenaar</h2>
-     <a href="team.php?id=1" class="button">info over Ronaldo</a>
+      <a href="team.php?id=1" class="button">info over Ronaldo</a>
     </div>
 
-    <div class="Neymar ">
+    <div class="Neymar">
       <h2>Neymar</h2>
-  <img src="afbeeldingen/image copy.png" alt="De Kleuren stylist Neymar jr" class="Neymar-foto">
+      <img src="afbeeldingen/image copy.png" alt="De Kleuren stylist Neymar jr" class="Neymar-foto">
       <h2>De Kleuren stylist</h2>
-     <a href="team.php?id=4" class="button">info over Neymar</a>
+      <a href="team.php?id=4" class="button">info over Neymar</a>
     </div>
 
-      <div class="Corleone ">
+    <div class="Corleone">
       <h2>Corleone</h2>
-  <img src="afbeeldingen/image copy 2.png" alt="De Barbier" class="corleone-foto">
-      <h2>De Barbier </h2>
- <a href="team.php?id=5" class="button">info over Corleone </a>
+      <img src="afbeeldingen/image copy 2.png" alt="De Barbier" class="corleone-foto">
+      <h2>De Barbier</h2>
+      <a href="team.php?id=5" class="button">info over Corleone</a>
     </div>
   </div>
-  </main>
+</main>
 
-
-   
+<!-- Reviews en footer blijven hetzelfde -->
 <main class="reviews">
   <h1>Wat onze klanten zeggen</h1>
   <div class="reviews-container">
@@ -122,10 +110,6 @@
     </div>
   </div>
 </main>
-
-
-
-
 
 <footer>
   <h3>Openingstijden</h3>
@@ -147,8 +131,5 @@
   <p class="footer-bottom">© 2025 Kapsalon Perfect Cut. Alle rechten voorbehouden.</p>
 </footer>
 
-
 </body>
 </html>
-
-
