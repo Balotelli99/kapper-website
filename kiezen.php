@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Behandelingen Overzicht</title>
      <link rel="stylesheet" href="style/kiezen.css">
+     
                        
 </head>
 <body>

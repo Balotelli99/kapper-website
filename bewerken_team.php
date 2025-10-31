@@ -7,7 +7,6 @@ if(!isset($_SESSION['user_id'])) {
 
 include 'db_connect.php';
 
-
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 // Haal gegevens van teamlid op
@@ -16,14 +15,18 @@ $row = $result->fetch_assoc();
 
 $message = "";
 
-
 if(isset($_POST['opslaan'])) {
     $naam = $_POST['naam'];
     $functie = $_POST['functie'];
     $beschrijving = $_POST['beschrijving'];
 
-    $conn->query("UPDATE team SET naam='$naam', functie='$functie', beschrijving='$beschrijving' WHERE id=$id");
-    $message = "Teamlid is bijgewerkt!";
+    $stmt = $conn->prepare("UPDATE team SET naam=?, functie=?, beschrijving=? WHERE id=?");
+    $stmt->bind_param("sssi", $naam, $functie, $beschrijving, $id);
+    if($stmt->execute()) {
+        $message = "<p style='color:green;'>Teamlid is bijgewerkt!</p>";
+    } else {
+        $message = "<p style='color:red;'>Fout bij bijwerken!</p>";
+    }
 }
 ?>
 
@@ -32,25 +35,35 @@ if(isset($_POST['opslaan'])) {
 <head>
     <meta charset="UTF-8">
     <title>Bewerk Teamlid</title>
+    <link rel="stylesheet" href="style/bewerkbehandeling.css"> <!-- Zelfde CSS als nieuwe behandeling -->
 </head>
 <body>
-<h1>Bewerk Teamlid</h1>
-<p style="color:green;"><?php echo $message; ?></p>
+    <h2>Bewerk Teamlid</h2>
 
-<form method="POST">
-    Naam: <br>
-    <input type="text" name="naam" value="<?php echo $row['naam']; ?>"><br><br>
+    <!-- Terug knop -->
+    <a href="team_overzicht.php" class="toevoegen-btn">← Terug naar overzicht</a>
 
-    Functie: <br>
-    <input type="text" name="functie" value="<?php echo $row['functie']; ?>"><br><br>
+    <!-- Formulier container -->
+    <div class="form-container">
+        <form method="POST">
+            <!-- Naam -->
+            <label for="naam">Naam:</label>
+            <input type="text" id="naam" name="naam" value="<?= htmlspecialchars($row['naam']) ?>" required>
 
-    Beschrijving: <br>
-    <textarea name="beschrijving"><?php echo $row['beschrijving']; ?></textarea><br><br>
+            <!-- Functie -->
+            <label for="functie">Functie:</label>
+            <input type="text" id="functie" name="functie" value="<?= htmlspecialchars($row['functie']) ?>" required>
 
-    <input type="submit" name="opslaan" value="Opslaan">
-</form>
+            <!-- Beschrijving -->
+            <label for="beschrijving">Beschrijving:</label>
+            <textarea id="beschrijving" name="beschrijving" required><?= htmlspecialchars($row['beschrijving']) ?></textarea>
 
-<br>
-<a href="team_overzicht.php">Terug naar overzicht</a>
+            <!-- Opslaan knop -->
+            <button type="submit" name="opslaan">Opslaan</button>
+        </form>
+
+        <!-- Bericht -->
+        <?= $message ?>
+    </div>
 </body>
 </html>

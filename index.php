@@ -18,7 +18,7 @@ $behandelingen = $conn->query("SELECT * FROM behandelingen ORDER BY id ASC");
 <header>
   <nav>
     <a href="afspraak.php">Afspraak</a>
-    <a href="team.html">Het Team</a>
+    <a href="team.php">Het Team</a>
     <a href="#">Kosten</a>
     <a href="producten.html">Producten</a>
     <a href="#">Contact</a>

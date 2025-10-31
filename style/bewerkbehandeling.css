@@ -1,0 +1,103 @@
+/* Algemene instellingen */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f8f4e3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 2rem 1rem;
+    color: #333;
+}
+
+/* Titel */
+h2 {
+    color: #735c08;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    letter-spacing: 0.8px;
+}
+
+/* Terug knop / consistent met team */
+.toevoegen-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #a37a0f, #735c08);
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(115, 92, 8, 0.3);
+}
+
+.toevoegen-btn:hover {
+    background: linear-gradient(135deg, #c9981b, #8a6c0a);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(115, 92, 8, 0.4);
+}
+
+/* Formulier container */
+.form-container {
+    background: #fff;
+    padding: 30px 35px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Inputs & textarea */
+input[type="text"],
+input[type="number"],
+textarea {
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #a37a0f;
+    box-shadow: 0 0 8px rgba(163, 122, 15, 0.3);
+    outline: none;
+}
+
+/* Opslaan knop */
+button {
+    background: linear-gradient(135deg, #a37a0f, #735c08);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 14px 25px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 18px rgba(115,92,8,0.3);
+}
+
+button:hover {
+    background: linear-gradient(135deg, #c9981b, #8a6c0a);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(115,92,8,0.4);
+}
+
+/* Animatie */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}

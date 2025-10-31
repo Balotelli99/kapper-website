@@ -13,7 +13,6 @@ if(isset($_POST['opslaan'])){
     $functie = $_POST['functie'];
     $beschrijving = $_POST['beschrijving'];
 
-    // Corrected SQL statement
     $stmt = $conn->prepare("INSERT INTO team (naam, functie, beschrijving) VALUES (?,?,?)");
     $stmt->bind_param("sss", $naam, $functie, $beschrijving);
 
@@ -25,14 +24,40 @@ if(isset($_POST['opslaan'])){
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Nieuw Teamlid Toevoegen</title>
+    <link rel="stylesheet" href="style/bewerkbehandeling.css"> <!-- Zelfde CSS als bewerk formulier -->
+</head>
+<body>
+    <h2>Nieuw Teamlid Toevoegen</h2>
 
-<h2>Nieuw teamlid Toevoegen</h2>
-<form method="POST">
-    <input type="text" name="naam" placeholder="Naam" required><br>
-    <input type="text" name="functie" placeholder="Functie" required><br>
-    <textarea name="beschrijving" placeholder="Beschrijving" required></textarea><br>
- 
-    <button type="submit" name="opslaan">Opslaan</button>
-</form>
+    <!-- Terug knop -->
+    <a href="team_overzicht.php" class="toevoegen-btn">← Terug naar overzicht</a>
 
-<?= $message ?>
+    <!-- Formulier container -->
+    <div class="form-container">
+        <form method="POST">
+            <!-- Naam -->
+            <label for="naam">Naam:</label>
+            <input type="text" id="naam" name="naam" placeholder="Naam" required>
+
+            <!-- Functie -->
+            <label for="functie">Functie:</label>
+            <input type="text" id="functie" name="functie" placeholder="Functie" required>
+
+            <!-- Beschrijving -->
+            <label for="beschrijving">Beschrijving:</label>
+            <textarea id="beschrijving" name="beschrijving" placeholder="Beschrijving" required></textarea>
+
+            <!-- Opslaan knop -->
+            <button type="submit" name="opslaan">Opslaan</button>
+        </form>
+
+        <!-- Bericht -->
+        <?= $message ?>
+    </div>
+</body>
+</html>

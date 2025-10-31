@@ -7,8 +7,11 @@ if(!isset($_SESSION['user_id'])) {
 
 include 'db_connect.php';
 
+// Behandeling-ID ophalen
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-$result = $conn->query("SELECT * FROM behandelingen WHERE id=$id");
+
+// Behandeling uit database halen
+$result = $conn->query("SELECT * FROM behandelingen WHERE id = $id");
 $row = $result->fetch_assoc();
 
 $message = "";
@@ -18,8 +21,14 @@ if(isset($_POST['opslaan'])) {
     $beschrijving = $_POST['beschrijving'];
     $prijs = $_POST['prijs'];
 
-    $conn->query("UPDATE behandelingen SET naam='$naam', beschrijving='$beschrijving', prijs='$prijs' WHERE id=$id");
-    $message = "Behandeling is bijgewerkt!";
+    $stmt = $conn->prepare("UPDATE behandelingen SET naam=?, beschrijving=?, prijs=? WHERE id=?");
+    $stmt->bind_param("ssdi", $naam, $beschrijving, $prijs, $id);
+
+    if($stmt->execute()) {
+        $message = "<p style='color:green;'>Behandeling is bijgewerkt!</p>";
+    } else {
+        $message = "<p style='color:red;'>Fout bij bijwerken!</p>";
+    }
 }
 ?>
 
@@ -28,25 +37,35 @@ if(isset($_POST['opslaan'])) {
 <head>
     <meta charset="UTF-8">
     <title>Bewerk Behandeling</title>
+    <link rel="stylesheet" href="style/bewerkbehandeling.css"> <!-- Zelfde stijl als nieuwe behandeling -->
 </head>
 <body>
-<h1>Bewerk Behandeling</h1>
-<p style="color:green;"><?php echo $message; ?></p>
+    <h2>Bewerk Behandeling</h2>
 
-<form method="POST">
-    Naam: <br>
-    <input type="text" name="naam" value="<?php echo $row['naam']; ?>"><br><br>
+    <!-- Terug knop -->
+    <a href="behandelingen_overzicht.php" class="toevoegen-btn">← Terug naar overzicht</a>
 
-    Beschrijving: <br>
-    <textarea name="beschrijving"><?php echo $row['beschrijving']; ?></textarea><br><br>
+    <!-- Formulier container -->
+    <div class="form-container">
+        <form method="POST">
+            <!-- Naam -->
+            <label for="naam">Naam:</label>
+            <input type="text" id="naam" name="naam" value="<?= htmlspecialchars($row['naam']) ?>" required>
 
-    Prijs: <br>
-    <input type="number" step="0.01" name="prijs" value="<?php echo $row['prijs']; ?>"><br><br>
+            <!-- Beschrijving -->
+            <label for="beschrijving">Beschrijving:</label>
+            <textarea id="beschrijving" name="beschrijving" required><?= htmlspecialchars($row['beschrijving']) ?></textarea>
 
-    <input type="submit" name="opslaan" value="Opslaan">
-</form>
+            <!-- Prijs -->
+            <label for="prijs">Prijs (€):</label>
+            <input type="number" id="prijs" name="prijs" step="0.01" value="<?= htmlspecialchars($row['prijs']) ?>" required>
 
-<br>
-<a href="behandelingen_overzicht.php">Terug naar overzicht</a>
+            <!-- Opslaan knop -->
+            <button type="submit" name="opslaan">Opslaan</button>
+        </form>
+
+        <!-- Bericht -->
+        <?= $message ?>
+    </div>
 </body>
 </html>

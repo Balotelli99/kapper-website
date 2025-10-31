@@ -1,0 +1,164 @@
+/* === ALGEMENE INSTELLINGEN === */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f8f4e3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 2rem 1rem;
+    color: #333;
+}
+
+/* === TITEL === */
+h1 {
+    color: #735c08;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* === TABEL STYLING === */
+table {
+    width: 100%;
+    max-width: 1100px;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.6s ease-out;
+}
+
+th {
+    background: linear-gradient(135deg, #a37a0f, #735c08);
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+    padding: 14px 16px;
+    letter-spacing: 0.5px;
+}
+
+td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+tr:nth-child(even) {
+    background: #fffaf0;
+}
+
+tr:hover {
+    background: #fff4d6;
+    transition: 0.3s ease;
+}
+
+/* === FOTO'S === */
+td img {
+    width: 70px;
+    height: 70px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 3px solid #cfa52a;
+    box-shadow: 0 3px 8px rgba(115, 92, 8, 0.3);
+}
+
+.geen-foto {
+    color: #999;
+    font-style: italic;
+}
+
+/* === ACTIE KNOPPEN IN DE TABEL === */
+td a {
+    display: inline-block;
+    background: linear-gradient(135deg, #a37a0f, #735c08);
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 2px 4px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(115, 92, 8, 0.3);
+}
+
+td a:hover {
+    background: linear-gradient(135deg, #c9981b, #8a6c0a);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(115, 92, 8, 0.4);
+}
+
+/* === EXTRA RIJ ONDERAAN === */
+.table-footer td {
+    text-align: center;
+    background: #fff8e0;
+    padding: 20px;
+}
+
+.table-footer a {
+    background: linear-gradient(135deg, #b58916, #7e630b);
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 0 10px;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(115, 92, 8, 0.3);
+    transition: 0.3s ease;
+}
+
+.table-footer a:hover {
+    background: linear-gradient(135deg, #cfa52a, #8a6c0a);
+    transform: translateY(-2px);
+}
+
+/* === ANIMATIE === */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* === RESPONSIVE ONTWERP === */
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    th {
+        display: none;
+    }
+
+    td {
+        padding: 10px;
+        border: none;
+        border-bottom: 1px solid #eee;
+    }
+
+    td:before {
+        content: attr(data-label);
+        display: block;
+        font-weight: bold;
+        color: #735c08;
+        margin-bottom: 4px;
+    }
+
+    td img {
+        width: 100%;
+        max-width: 150px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .table-footer td {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}

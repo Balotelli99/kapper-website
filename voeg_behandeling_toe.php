@@ -23,18 +23,28 @@ if(isset($_POST['opslaan'])){
     }
 }
 ?>
+<!DOCTYPE html>
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <title>Team Overzicht</title>
-  <link rel="stylesheet" href="style/voegbehandeling.css">
+  <title>Nieuwe Behandeling Toevoegen</title>
+  <link rel="stylesheet" href="style/bewerkbehandeling.css">
 </head>
+<body>
+    <h2>Nieuwe Behandeling Toevoegen</h2>
 
-<h2>Nieuwe Behandeling Toevoegen</h2>
-<form method="POST">
-    <input type="text" name="naam" placeholder="Naam" required><br>
-    <textarea name="beschrijving" placeholder="Beschrijving" required></textarea><br>
-    <input type="number" step="0.01" name="prijs" placeholder="Prijs" required><br>
-    <button type="submit" name="opslaan">Opslaan</button>
-</form>
+    <!-- Terug knop -->
+    <a href="behandelingen_overzicht.php" class="toevoegen-btn">← Terug naar overzicht</a>
 
-<?= $message ?>
+    <!-- Formulier -->
+    <div class="form-container">
+        <form method="POST">
+            <input type="text" name="naam" placeholder="Naam" required>
+            <textarea name="beschrijving" placeholder="Beschrijving" required></textarea>
+            <input type="number" step="0.01" name="prijs" placeholder="Prijs" required>
+            <button type="submit" name="opslaan">Opslaan</button>
+        </form>
+        <?= $message ?>
+    </div>
+</body>
+</html>

@@ -1,135 +1,124 @@
-/* ==== TEAM OVERZICHT PAGINA ==== */
-
-/* Algemene layout */
-body {
+/* Container */
+.team-container {
+    max-width: 700px;
+    margin: 50px auto;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #735c08, #f8f4e3);
+    text-align: center;
     color: #333;
-    margin: 0;
+}
+
+/* Teamlid info */
+.teamlid-info h1 {
+    font-size: 2rem;
+    color: #735c08;
+    margin-bottom: 5px;
+}
+
+.teamlid-info h2 {
+    font-size: 1.3rem;
+    color: #a37a0f;
+    margin-bottom: 15px;
+}
+
+.teamlid-info p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.teamlid-info img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 3px solid #cfa52a;
+    margin-bottom: 25px;
+}
+
+/* Afspraak sectie */
+.afspraak-sectie {
+    background: #fff;
     padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    text-align: left;
+    margin-top: 30px;
+}
+
+/* Formulier styling */
+.afspraak-sectie h2 {
+    color: #735c08;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.afspraak-sectie form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
+    gap: 15px;
 }
 
-/* Pagina titel */
-h1 {
-    color: #735c08;
-    font-size: 30px;
-    margin-bottom: 2rem;
-    text-align: center;
+.afspraak-sectie label {
+    font-weight: 600;
 }
 
-/* Tabel container */
-table {
-    border-collapse: collapse;
-    width: 100%;
-    max-width: 1000px;
-    background: #fff;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    animation: fadeIn 0.6s ease-out;
-}
-
-/* Koprij */
-th {
-    background: linear-gradient(135deg, #a37a0f, #735c08);
-    color: #fff;
-    text-align: left;
-    padding: 14px 16px;
-    font-size: 16px;
-}
-
-/* Cellen */
-td {
-    padding: 14px 16px;
-    border-bottom: 1px solid #eee;
-    vertical-align: middle;
-}
-
-tr:last-child td {
-    border-bottom: none;
-}
-
-/* Rij-hover effect */
-tr:hover {
-    background-color: #f8f4e3;
-    transition: background-color 0.2s ease;
-}
-
-/* Foto's */
-td img {
-    border-radius: 8px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-}
-
-/* Actie-links */
-td a {
-    background: linear-gradient(135deg, #a37a0f, #735c08);
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 8px;
+.afspraak-sectie input,
+.afspraak-sectie select,
+.afspraak-sectie textarea {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
     font-size: 14px;
+    transition: 0.3s;
+}
+
+.afspraak-sectie input:focus,
+.afspraak-sectie select:focus,
+.afspraak-sectie textarea:focus {
+    border-color: #735c08;
+    outline: none;
+    background-color: #fff;
+}
+
+/* Knop */
+.afspraak-sectie button {
+    background: linear-gradient(135deg, #a37a0f, #735c08);
+    color: #fff;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
     transition: all 0.3s ease;
 }
 
-td a:hover {
+.afspraak-sectie button:hover {
     background: linear-gradient(135deg, #c9981b, #8a6c0a);
-    transform: scale(1.05);
 }
 
-/* Afstand tussen knoppen */
-td a + a {
-    margin-left: 8px;
-}
-
-/* Geen teamleden melding */
-td[colspan] {
+/* Succes / foutmelding */
+.success {
+    color: green;
+    font-weight: 500;
     text-align: center;
-    color: #555;
-    font-style: italic;
+    margin-bottom: 10px;
 }
 
-/* Animatie */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.error {
+    color: red;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
-/* Responsief */
-@media (max-width: 768px) {
-    table, thead, tbody, th, td, tr {
-        display: block;
+/* Responsive */
+@media(max-width:768px){
+    .team-container {
+        margin: 30px 10px;
     }
 
-    th {
-        display: none;
-    }
-
-    tr {
-        background: #fff;
-        margin-bottom: 1rem;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        padding: 1rem;
-    }
-
-    td {
-        border: none;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 8px 0;
-    }
-
-    td::before {
-        content: attr(data-label);
-        font-weight: 600;
-        color: #735c08;
-        flex-basis: 40%;
-        text-align: left;
+    .teamlid-info img {
+        width: 140px;
+        height: 140px;
     }
 }
