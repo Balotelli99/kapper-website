@@ -14,9 +14,9 @@ if(isset($_POST['verstuur'])) {
     $stmt->bind_param("iisss", $behandeling_id, $team_id, $naam, $email, $datum);
 
     if($stmt->execute()) {
-        $success = "✅ Afspraak succesvol gemaakt!";
+        $success = "Afspraak succesvol gemaakt!";
     } else {
-        $error = "❌ Er ging iets mis. Probeer het opnieuw.";
+        $error = " Er ging iets mis. Probeer het opnieuw.";
     }
 }
 ?>
