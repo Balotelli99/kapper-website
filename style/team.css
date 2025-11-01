@@ -1,124 +1,52 @@
-/* Container */
 .team-container {
-    max-width: 700px;
-    margin: 50px auto;
-    font-family: 'Poppins', sans-serif;
-    text-align: center;
-    color: #333;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
 }
 
-/* Teamlid info */
-.teamlid-info h1 {
-    font-size: 2rem;
+.teamlid {
+    background: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 220px;
+}
+
+.teamlid img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #cfa52a;
+    margin-bottom: 10px;
+}
+
+.teamlid h2 {
     color: #735c08;
     margin-bottom: 5px;
 }
 
-.teamlid-info h2 {
-    font-size: 1.3rem;
+.teamlid h3 {
     color: #a37a0f;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
-.teamlid-info p {
-    font-size: 1rem;
-    line-height: 1.5;
-    margin-bottom: 20px;
+.teamlid p {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
 }
 
-.teamlid-info img {
-    width: 180px;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 12px;
-    border: 3px solid #cfa52a;
-    margin-bottom: 25px;
-}
-
-/* Afspraak sectie */
-.afspraak-sectie {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-    text-align: left;
-    margin-top: 30px;
-}
-
-/* Formulier styling */
-.afspraak-sectie h2 {
-    color: #735c08;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.afspraak-sectie form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.afspraak-sectie label {
-    font-weight: 600;
-}
-
-.afspraak-sectie input,
-.afspraak-sectie select,
-.afspraak-sectie textarea {
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    transition: 0.3s;
-}
-
-.afspraak-sectie input:focus,
-.afspraak-sectie select:focus,
-.afspraak-sectie textarea:focus {
-    border-color: #735c08;
-    outline: none;
-    background-color: #fff;
-}
-
-/* Knop */
-.afspraak-sectie button {
+.teamlid .button {
     background: linear-gradient(135deg, #a37a0f, #735c08);
     color: #fff;
-    border: none;
-    padding: 14px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 15px;
-    transition: all 0.3s ease;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.afspraak-sectie button:hover {
+.teamlid .button:hover {
     background: linear-gradient(135deg, #c9981b, #8a6c0a);
-}
-
-/* Succes / foutmelding */
-.success {
-    color: green;
-    font-weight: 500;
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.error {
-    color: red;
-    font-weight: 500;
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-/* Responsive */
-@media(max-width:768px){
-    .team-container {
-        margin: 30px 10px;
-    }
-
-    .teamlid-info img {
-        width: 140px;
-        height: 140px;
-    }
 }

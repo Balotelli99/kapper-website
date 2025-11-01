@@ -1,88 +1,85 @@
 <?php
-$conn = new mysqli("localhost","root","","kapperwebshop");
+session_start();
+include 'db_connect.php';
 
+// ID van het teamlid uit de URL halen
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-$sql = "SELECT * FROM team WHERE id=$id";
-$result = $conn->query($sql);
-
-$teamlid = null;
-if($result && $result->num_rows > 0){
-    $teamlid = $result->fetch_assoc();
+if ($id <= 0) {
+    echo "Ongeldig teamlid ID.";
+    exit;
 }
 
-$sql2 = "SELECT * FROM behandelingen";
-$res2 = $conn->query($sql2);
-$behandelingen = [];
-if($res2 && $res2->num_rows > 0){
-    while($row = $res2->fetch_assoc()){
-        $behandelingen[] = $row;
-    }
+// Teamlid ophalen uit de database
+$stmt = $conn->prepare("SELECT * FROM team WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+$lid = $result->fetch_assoc();
+
+if (!$lid) {
+    echo "Teamlid niet gevonden.";
+    exit;
 }
 
-$afspraakMessage = "";
-if(isset($_POST['afspraak'])){
-    $behandeling_id = $_POST['behandeling_id'];
+// Formulier verwerken
+if (isset($_POST['verstuur'])) {
     $naam = $_POST['naam'];
     $email = $_POST['email'];
     $datum = $_POST['datum'];
-    $stmt = $conn->prepare("INSERT INTO afspraken (behandeling_id, team_id, naam, email, datum) VALUES (?,?,?,?,?)");
-    $stmt->bind_param("iisss",$behandeling_id, $id, $naam, $email, $datum);
-    if($stmt->execute()){
-        $afspraakMessage = "<p class='success'>Afspraak succesvol!</p>";
+
+    // Verondersteld dat je ook een kolom team_id hebt in afspraken
+    $stmt2 = $conn->prepare("INSERT INTO afspraken (team_id, naam, email, datum) VALUES (?, ?, ?, ?)");
+    $stmt2->bind_param("isss", $id, $naam, $email, $datum);
+
+    if ($stmt2->execute()) {
+        $success = "Afspraak succesvol gemaakt!";
     } else {
-        $afspraakMessage = "<p class='error'>Fout bij het maken van de afspraak!</p>";
+        $error = "Er ging iets mis. Probeer het opnieuw.";
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>Teamlid Details</title>
-    <link rel="stylesheet" href="style/team.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= htmlspecialchars($lid['naam']) ?> - Sultan's Hairstyles</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/afspraak.css">
 </head>
 <body>
-    <div class="team-container">
-        <div class="teamlid-info">
-            <?php if($teamlid): ?>
-                <h1><?= htmlspecialchars($teamlid['naam']) ?></h1>
-                <h2><?= htmlspecialchars($teamlid['functie']) ?></h2>
-                <p><?= htmlspecialchars($teamlid['beschrijving']) ?></p>
-                <?php if($teamlid['foto']): ?>
-                    <img src="<?= htmlspecialchars($teamlid['foto']) ?>" alt="<?= htmlspecialchars($teamlid['naam']) ?>">
-                <?php endif; ?>
-            <?php else: ?>
-                <p>Teamlid niet gevonden.</p>
-            <?php endif; ?>
-        </div>
 
-        <?php if(count($behandelingen) > 0 && $teamlid): ?>
-            <div class="afspraak-sectie">
-                <h2>Maak een afspraak</h2>
-                <?= $afspraakMessage ?>
-                <form method="POST">
-                    <label for="behandeling_id">Behandeling kiezen:</label>
-                    <select name="behandeling_id" id="behandeling_id" required>
-                        <?php foreach($behandelingen as $b): ?>
-                            <option value="<?= $b['id'] ?>"><?= htmlspecialchars($b['naam']) ?> (€<?= htmlspecialchars($b['prijs']) ?>)</option>
-                        <?php endforeach; ?>
-                    </select>
 
-                    <label for="naam">Jouw naam:</label>
-                    <input type="text" name="naam" id="naam" placeholder="Jouw naam" required>
+<main class="afspraak-sectie">
+    <h1><?= htmlspecialchars($lid['naam']) ?></h1>
+    <h2><?= htmlspecialchars($lid['functie']) ?></h2>
+    <?php if(!empty($lid['foto'])): ?>
+        <img src="<?= htmlspecialchars($lid['foto']) ?>" alt="Foto van <?= htmlspecialchars($lid['naam']) ?>" style="width:200px; border-radius:10px;">
+    <?php endif; ?>
+    <p><?= nl2br(htmlspecialchars($lid['beschrijving'])) ?></p>
 
-                    <label for="email">Jouw email:</label>
-                    <input type="email" name="email" id="email" placeholder="Jouw email" required>
+    <hr>
+    <h2>Maak een afspraak met <?= htmlspecialchars($lid['naam']) ?></h2>
+    <?php if(isset($success)) echo "<p class='success'>$success</p>"; ?>
+    <?php if(isset($error)) echo "<p class='error'>$error</p>"; ?>
 
-                    <label for="datum">Datum en tijd:</label>
-                    <input type="datetime-local" name="datum" id="datum" required>
+    <form method="POST">
+        <label for="naam">Naam:</label>
+        <input type="text" id="naam" name="naam" placeholder="Bijv. Jan Jansen" required>
 
-                    <button type="submit" name="afspraak">Afspraak maken</button>
-                </form>
-            </div>
-        <?php endif; ?>
-    </div>
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" placeholder="janjansen@example.com" required>
+
+        <label for="datum">Datum:</label>
+        <input type="date" id="datum" name="datum" required>
+
+        <button type="submit" name="verstuur">Afspraak Bevestigen</button>
+    </form>
+
+    <a href="index.php" class="terug-btn">← Terug naar hoofdpagina</a>
+</main>
+
+
 </body>
 </html>

@@ -12,9 +12,10 @@ if(isset($_POST['opslaan'])){
     $naam = $_POST['naam'];
     $functie = $_POST['functie'];
     $beschrijving = $_POST['beschrijving'];
+    $foto = $_POST['foto']; // Voeg foto toe
 
-    $stmt = $conn->prepare("INSERT INTO team (naam, functie, beschrijving) VALUES (?,?,?)");
-    $stmt->bind_param("sss", $naam, $functie, $beschrijving);
+    $stmt = $conn->prepare("INSERT INTO team (naam, functie, beschrijving, foto) VALUES (?,?,?,?)");
+    $stmt->bind_param("ssss", $naam, $functie, $beschrijving, $foto);
 
     if($stmt->execute()){
         $message = "<p style='color:green;'>Teamlid toegevoegd!</p>";
@@ -23,40 +24,35 @@ if(isset($_POST['opslaan'])){
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
     <title>Nieuw Teamlid Toevoegen</title>
-    <link rel="stylesheet" href="style/bewerkbehandeling.css"> <!-- Zelfde CSS als bewerk formulier -->
+    <link rel="stylesheet" href="style/bewerkbehandeling.css">
 </head>
 <body>
     <h2>Nieuw Teamlid Toevoegen</h2>
 
-    <!-- Terug knop -->
     <a href="team_overzicht.php" class="toevoegen-btn">← Terug naar overzicht</a>
 
-    <!-- Formulier container -->
     <div class="form-container">
         <form method="POST">
-            <!-- Naam -->
             <label for="naam">Naam:</label>
             <input type="text" id="naam" name="naam" placeholder="Naam" required>
 
-            <!-- Functie -->
             <label for="functie">Functie:</label>
             <input type="text" id="functie" name="functie" placeholder="Functie" required>
 
-            <!-- Beschrijving -->
             <label for="beschrijving">Beschrijving:</label>
             <textarea id="beschrijving" name="beschrijving" placeholder="Beschrijving" required></textarea>
 
-            <!-- Opslaan knop -->
+            <label for="foto">Foto (typ alleen bestandsnaam, bijv. 'ronaldo.png'):</label>
+            <input type="text" id="foto" name="foto" placeholder="ronaldo.png">
+
             <button type="submit" name="opslaan">Opslaan</button>
         </form>
 
-        <!-- Bericht -->
         <?= $message ?>
     </div>
 </body>

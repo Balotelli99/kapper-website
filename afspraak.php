@@ -32,16 +32,6 @@ if(isset($_POST['verstuur'])) {
 </head>
 <body>
 
-<header>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="afspraak.php" class="active">Afspraak</a>
-        <a href="team.html">Het Team</a>
-        <a href="#">Kosten</a>
-        <a href="producten.html">Producten</a>
-        <a href="#">Contact</a>
-    </nav>
-</header>
 
 <main class="afspraak-sectie">
     <h1>Maak een Afspraak</h1>
@@ -82,25 +72,8 @@ if(isset($_POST['verstuur'])) {
     <a href="index.php" class="terug-btn">← Terug naar hoofdpagina</a>
 </main>
 
-<footer>
-    <h3>Openingstijden</h3>
-    <p>
-        Maandag: 09:30 - 18:00<br>
-        Dinsdag: 09:30 - 18:00<br>
-        Donderdag: 09:30 - 18:00<br>
-        Vrijdag: 09:30 - 20:00<br>
-        Zaterdag: 12:00 - 17:00
-    </p>
 
-    <h3>Contact</h3>
-    <p>
-        Telefoon: 0123-456789<br>
-        Email: info@perfectcut.nl<br>
-        Adres: Hoofdstraat 123, 1234 AB Stad
-    </p>
 
-    <p class="footer-bottom">© 2025 Kapsalon Perfect Cut. Alle rechten voorbehouden.</p>
-</footer>
 
 </body>
 </html>
