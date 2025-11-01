@@ -33,9 +33,11 @@ $teamleden = $conn->query("SELECT * FROM team ORDER BY id ASC");
   <h1>Welkom bij Kapsalon Perfect Cut</h1>
   <p>Waar stijl, verzorging en ontspanning samenkomen.</p>
   <a href="afspraak.php" class="button">Maak een afspraak</a>
+
 </main>
 
 <main class="midden2">
+    <img src="image.png" alt="banner">
   <h1>Over Sultan's Hairstyles</h1>
   <h2>Als je een goede kapper in Utrecht zoekt</h2>
   <p>
@@ -44,9 +46,9 @@ $teamleden = $conn->query("SELECT * FROM team ORDER BY id ASC");
     een look te geven waar je zelfverzekerd mee de deur uitgaat.
   </p>
   <div class="midden2-fotos">
-    <img src="afbeeldingen/ronaldo.png" alt="Ronaldo">
-    <img src="afbeeldingen/neymar.png" alt="Neymar">
-    <img src="afbeeldingen/corleone.png" alt="Corleone">
+    <img src="afbeeldingen/image copy 3.png" alt="Ronaldo">
+    <img src="afbeeldingen/image copy 4.png" alt="Neymar">
+    <img src="afbeeldingen/image copy 5.png" alt="Corleone">
   </div>
 </main>
 

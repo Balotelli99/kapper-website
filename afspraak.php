@@ -8,15 +8,16 @@ if(isset($_POST['verstuur'])) {
     $email = $_POST['email'];
     $behandeling_id = $_POST['behandeling_id'];
     $team_id = $_POST['team_id'];
-    $datum = $_POST['datum'];
+    $datumtijd = $_POST['datumtijd']; // Datum en tijd samen
+    $datumtijd = str_replace("T", " ", $datumtijd); // Zet T om naar spatie voor MySQL DATETIME
 
     $stmt = $conn->prepare("INSERT INTO afspraken (behandeling_id, team_id, naam, email, datum) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("iisss", $behandeling_id, $team_id, $naam, $email, $datum);
+    $stmt->bind_param("iisss", $behandeling_id, $team_id, $naam, $email, $datumtijd);
 
     if($stmt->execute()) {
         $success = "Afspraak succesvol gemaakt!";
     } else {
-        $error = " Er ging iets mis. Probeer het opnieuw.";
+        $error = "Er ging iets mis. Probeer het opnieuw.";
     }
 }
 ?>
@@ -31,7 +32,6 @@ if(isset($_POST['verstuur'])) {
     <link rel="stylesheet" href="style/afspraak.css">
 </head>
 <body>
-
 
 <main class="afspraak-sectie">
     <h1>Maak een Afspraak</h1>
@@ -63,17 +63,14 @@ if(isset($_POST['verstuur'])) {
             <option value="5">Corleone</option>
         </select>
 
-        <label for="datum">Datum:</label>
-        <input type="date" id="datum" name="datum" required>
+        <label for="datumtijd">Datum en Tijd:</label>
+        <input type="datetime-local" id="datumtijd" name="datumtijd" required>
 
         <button type="submit" name="verstuur">Afspraak Bevestigen</button>
     </form>
 
     <a href="index.php" class="terug-btn">← Terug naar hoofdpagina</a>
 </main>
-
-
-
 
 </body>
 </html>

@@ -26,11 +26,12 @@ if (!$lid) {
 if (isset($_POST['verstuur'])) {
     $naam = $_POST['naam'];
     $email = $_POST['email'];
-    $datum = $_POST['datum'];
+    $datumtijd = $_POST['datumtijd'];
+    $datumtijd = str_replace("T", " ", $datumtijd); // Voor MySQL DATETIME
 
     // Verondersteld dat je ook een kolom team_id hebt in afspraken
     $stmt2 = $conn->prepare("INSERT INTO afspraken (team_id, naam, email, datum) VALUES (?, ?, ?, ?)");
-    $stmt2->bind_param("isss", $id, $naam, $email, $datum);
+    $stmt2->bind_param("isss", $id, $naam, $email, $datumtijd);
 
     if ($stmt2->execute()) {
         $success = "Afspraak succesvol gemaakt!";
@@ -49,7 +50,6 @@ if (isset($_POST['verstuur'])) {
     <link rel="stylesheet" href="style/afspraak.css">
 </head>
 <body>
-
 
 <main class="afspraak-sectie">
     <h1><?= htmlspecialchars($lid['naam']) ?></h1>
@@ -71,15 +71,14 @@ if (isset($_POST['verstuur'])) {
         <label for="email">E-mail:</label>
         <input type="email" id="email" name="email" placeholder="janjansen@example.com" required>
 
-        <label for="datum">Datum:</label>
-        <input type="date" id="datum" name="datum" required>
+        <label for="datumtijd">Datum en Tijd:</label>
+        <input type="datetime-local" id="datumtijd" name="datumtijd" required>
 
         <button type="submit" name="verstuur">Afspraak Bevestigen</button>
     </form>
 
     <a href="index.php" class="terug-btn">← Terug naar hoofdpagina</a>
 </main>
-
 
 </body>
 </html>
