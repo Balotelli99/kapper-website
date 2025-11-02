@@ -1,11 +1,7 @@
 <?php
-// Verbinding maken met de database
 include 'db_connect.php';
 
-// Behandelingen ophalen
 $behandelingen = $conn->query("SELECT * FROM behandelingen ORDER BY id ASC");
-
-// Teamleden ophalen
 $teamleden = $conn->query("SELECT * FROM team ORDER BY id ASC");
 ?>
 <!DOCTYPE html>
@@ -29,93 +25,71 @@ $teamleden = $conn->query("SELECT * FROM team ORDER BY id ASC");
   </nav>
 </header>
 
-<!-- Midden sectie -->
 <main class="midden">
   <h1>Welkom bij Kapsalon Perfect Cut</h1>
   <p>Waar stijl, verzorging en ontspanning samenkomen.</p>
   <a href="afspraak.php" class="button">Maak een afspraak</a>
 </main>
 
-<!-- Midden2 sectie (Over ons) -->
 <main class="midden2">
-    <h1>Over Sultan's Hairstyles</h1>
-    <h2>Als je een goede kapper in Utrecht zoekt</h2>
-    <p>
-        Bij Sultan's Hairstyles geloven we dat goed verzorgd haar het verschil maakt. 
-        Ons team van ervaren kappers combineert creativiteit en vakmanschap om jou elke dag 
-        een look te geven waar je zelfverzekerd mee de deur uitgaat.
-    </p>
-       
-        
-    <div class="midden2-fotos">
-        <img src="afbeeldingen/image copy 3.png" alt="Opscheer">
-        <img src="afbeeldingen/image copy 4.png" alt="Kleur">
-        <img src="afbeeldingen/image copy 5.png" alt="Baard">
-    </div>
+  <h1>Over Sultan's Hairstyles</h1>
+  <h2>Als je een goede kapper in Utrecht zoekt</h2>
+  <p>Ons team combineert creativiteit en vakmanschap om jou elke dag een look te geven waar je zelfverzekerd mee de deur uitgaat.</p>
+  <div class="midden2-fotos">
+    <img src="afbeeldingen/image copy 3.png" alt="Opscheer">
+    <img src="afbeeldingen/image copy 4.png" alt="Kleur">
+    <img src="afbeeldingen/image copy 5.png" alt="Baard">
+  </div>
 </main>
 
-<!-- Behandelingen sectie -->
+<!-- Behandelingen -->
 <main class="behandelingen">
   <h1>Onze Behandelingen</h1>
   <div class="behandelingen-container">
-    <?php if($behandelingen && $behandelingen->num_rows > 0): ?>
-      <?php while($b = $behandelingen->fetch_assoc()): ?>
-        <div class="behandeling">
-          <h2><?= htmlspecialchars($b['naam']) ?></h2>
-          <p><?= htmlspecialchars($b['beschrijving']) ?></p>
-          <p class="prijs">Prijs: €<?= htmlspecialchars($b['prijs']) ?></p>
-          <a href="behandelingen.php?id=<?= $b['id'] ?>" class="button">Maak Afspraak</a>
-        </div>
-      <?php endwhile; ?>
-    <?php else: ?>
-      <p>Geen behandelingen beschikbaar.</p>
-    <?php endif; ?>
+    <?php
+    if($behandelingen){
+      while($b = $behandelingen->fetch_assoc()){
+        echo "<div class='behandeling'>";
+        echo "<h2>".$b['naam']."</h2>";
+        echo "<p>".$b['beschrijving']."</p>";
+        echo "<p class='prijs'>Prijs: €".$b['prijs']."</p>";
+        echo "<a href='behandelingen.php?id=".$b['id']."' class='button'>Maak Afspraak</a>";
+        echo "</div>";
+      }
+    } else {
+      echo "<p>Geen behandelingen beschikbaar.</p>";
+    }
+    ?>
   </div>
 </main>
 
-<!-- Team sectie -->
+<!-- Team -->
 <main class="team">
   <h1>Het Team</h1>
   <div class="team-container">
-    <?php if($teamleden && $teamleden->num_rows > 0): ?>
-      <?php while($lid = $teamleden->fetch_assoc()): ?>
-        <div class="teamlid">
-          <h2><?= htmlspecialchars($lid['naam']) ?></h2>
-          <?php if(!empty($lid['foto'])): ?>
-            <img src="<?= htmlspecialchars($lid['foto']) ?>" alt="Foto van <?= htmlspecialchars($lid['naam']) ?>" class="team-foto">
-          <?php else: ?>
-            <img src="afbeeldingen/default.png" alt="Geen foto beschikbaar" class="team-foto">
-          <?php endif; ?>
-          <h3><?= htmlspecialchars($lid['functie']) ?></h3>
-          <p><?= htmlspecialchars($lid['beschrijving']) ?></p>
-          <a href="team.php?id=<?= $lid['id'] ?>" class="button">Meer info</a>
-        </div>
-      <?php endwhile; ?>
-    <?php else: ?>
-      <p>Geen teamleden beschikbaar.</p>
-    <?php endif; ?>
+    <?php
+    if($teamleden){
+      while($lid = $teamleden->fetch_assoc()){
+        echo "<div class='teamlid'>";
+        echo "<h2>".$lid['naam']."</h2>";
+        if($lid['foto'] != "") {
+          echo "<img src='".$lid['foto']."' alt='Foto van ".$lid['naam']."' class='team-foto'>";
+        } else {
+          echo "<img src='afbeeldingen/default.png' alt='Geen foto beschikbaar' class='team-foto'>";
+        }
+        echo "<h3>".$lid['functie']."</h3>";
+        echo "<p>".$lid['beschrijving']."</p>";
+        echo "<a href='team.php?id=".$lid['id']."' class='button'>Meer info</a>";
+        echo "</div>";
+      }
+    } else {
+      echo "<p>Geen teamleden beschikbaar.</p>";
+    }
+    ?>
   </div>
 </main>
 
-<!-- Reviews sectie -->
-<main class="reviews">
-  <h1>Wat onze klanten zeggen</h1>
-  <div class="reviews-container">
-    <div class="review">
-      <p>"Geweldige service en supervriendelijk team! Mijn haar zit perfect."</p>
-      <h3>- Hendrik</h3>
-    </div>
-    <div class="review">
-      <p>"De kapper begrijpt precies wat je wilt. Echt een aanrader!"</p>
-      <h3>- Mark</h3>
-    </div>
-    <div class="review">
-      <p>"Professioneel en gezellig. Mijn kinderen vinden het ook leuk om hier te komen."</p>
-      <h3>- Jan</h3>
-    </div>
-  </div>
-</main>
-
+<!-- Footer -->
 <footer>
   <h3>Openingstijden</h3>
   <p>
