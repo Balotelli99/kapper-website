@@ -29,30 +29,32 @@ $teamleden = $conn->query("SELECT * FROM team ORDER BY id ASC");
   </nav>
 </header>
 
+<!-- Midden sectie -->
 <main class="midden">
   <h1>Welkom bij Kapsalon Perfect Cut</h1>
   <p>Waar stijl, verzorging en ontspanning samenkomen.</p>
   <a href="afspraak.php" class="button">Maak een afspraak</a>
-
 </main>
 
+<!-- Midden2 sectie (Over ons) -->
 <main class="midden2">
-    <img src="image.png" alt="banner">
-  <h1>Over Sultan's Hairstyles</h1>
-  <h2>Als je een goede kapper in Utrecht zoekt</h2>
-  <p>
-    Bij Sultan's Hairstyles geloven we dat goed verzorgd haar het verschil maakt. 
-    Ons team van ervaren kappers combineert creativiteit en vakmanschap om jou elke dag 
-    een look te geven waar je zelfverzekerd mee de deur uitgaat.
-  </p>
-  <div class="midden2-fotos">
-    <img src="afbeeldingen/image copy 3.png" alt="Ronaldo">
-    <img src="afbeeldingen/image copy 4.png" alt="Neymar">
-    <img src="afbeeldingen/image copy 5.png" alt="Corleone">
-  </div>
+    <h1>Over Sultan's Hairstyles</h1>
+    <h2>Als je een goede kapper in Utrecht zoekt</h2>
+    <p>
+        Bij Sultan's Hairstyles geloven we dat goed verzorgd haar het verschil maakt. 
+        Ons team van ervaren kappers combineert creativiteit en vakmanschap om jou elke dag 
+        een look te geven waar je zelfverzekerd mee de deur uitgaat.
+    </p>
+       
+        
+    <div class="midden2-fotos">
+        <img src="afbeeldingen/image copy 3.png" alt="Opscheer">
+        <img src="afbeeldingen/image copy 4.png" alt="Kleur">
+        <img src="afbeeldingen/image copy 5.png" alt="Baard">
+    </div>
 </main>
 
-<!-- Behandelingen dynamisch -->
+<!-- Behandelingen sectie -->
 <main class="behandelingen">
   <h1>Onze Behandelingen</h1>
   <div class="behandelingen-container">
@@ -71,7 +73,7 @@ $teamleden = $conn->query("SELECT * FROM team ORDER BY id ASC");
   </div>
 </main>
 
-<!-- Team dynamisch -->
+<!-- Team sectie -->
 <main class="team">
   <h1>Het Team</h1>
   <div class="team-container">
@@ -79,13 +81,11 @@ $teamleden = $conn->query("SELECT * FROM team ORDER BY id ASC");
       <?php while($lid = $teamleden->fetch_assoc()): ?>
         <div class="teamlid">
           <h2><?= htmlspecialchars($lid['naam']) ?></h2>
-
           <?php if(!empty($lid['foto'])): ?>
             <img src="<?= htmlspecialchars($lid['foto']) ?>" alt="Foto van <?= htmlspecialchars($lid['naam']) ?>" class="team-foto">
           <?php else: ?>
             <img src="afbeeldingen/default.png" alt="Geen foto beschikbaar" class="team-foto">
           <?php endif; ?>
-
           <h3><?= htmlspecialchars($lid['functie']) ?></h3>
           <p><?= htmlspecialchars($lid['beschrijving']) ?></p>
           <a href="team.php?id=<?= $lid['id'] ?>" class="button">Meer info</a>
@@ -97,7 +97,7 @@ $teamleden = $conn->query("SELECT * FROM team ORDER BY id ASC");
   </div>
 </main>
 
-<!-- Reviews -->
+<!-- Reviews sectie -->
 <main class="reviews">
   <h1>Wat onze klanten zeggen</h1>
   <div class="reviews-container">

@@ -22,6 +22,34 @@ if (!$lid) {
     exit;
 }
 
+// Behandeling automatisch ophalen uit database op basis van teamlid
+$naam_behandeling = '';
+
+switch ($lid['naam']) {
+    case 'Ronaldo':
+        $naam_behandeling = 'Knippen';
+        break;
+    case 'Neymar':
+        $naam_behandeling = 'Kleuren';
+        break;
+    case 'Corleone':
+        $naam_behandeling = 'Baard knippen';
+        break;
+    default:
+        $naam_behandeling = 'Knippen'; // fallback
+}
+
+// Ophalen van behandeling uit database
+$stmt_behandeling = $conn->prepare("SELECT id, naam, prijs FROM behandelingen WHERE naam = ?");
+$stmt_behandeling->bind_param("s", $naam_behandeling);
+$stmt_behandeling->execute();
+$result_behandeling = $stmt_behandeling->get_result();
+$behandeling = $result_behandeling->fetch_assoc();
+
+$behandeling_id = $behandeling['id'];
+$behandeling_naam = $behandeling['naam'];
+$behandeling_prijs = $behandeling['prijs'];
+
 // Formulier verwerken
 if (isset($_POST['verstuur'])) {
     $naam = $_POST['naam'];
@@ -29,9 +57,8 @@ if (isset($_POST['verstuur'])) {
     $datumtijd = $_POST['datumtijd'];
     $datumtijd = str_replace("T", " ", $datumtijd); // Voor MySQL DATETIME
 
-    // Verondersteld dat je ook een kolom team_id hebt in afspraken
-    $stmt2 = $conn->prepare("INSERT INTO afspraken (team_id, naam, email, datum) VALUES (?, ?, ?, ?)");
-    $stmt2->bind_param("isss", $id, $naam, $email, $datumtijd);
+    $stmt2 = $conn->prepare("INSERT INTO afspraken (behandeling_id, team_id, naam, email, datum) VALUES (?, ?, ?, ?, ?)");
+    $stmt2->bind_param("iisss", $behandeling_id, $id, $naam, $email, $datumtijd);
 
     if ($stmt2->execute()) {
         $success = "Afspraak succesvol gemaakt!";
@@ -40,12 +67,13 @@ if (isset($_POST['verstuur'])) {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($lid['naam']) ?> - Sultan's Hairstyles</title>
+    <title><?= htmlspecialchars($lid['naam']) ?> - Maak Afspraak</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style/afspraak.css">
 </head>
@@ -61,6 +89,9 @@ if (isset($_POST['verstuur'])) {
 
     <hr>
     <h2>Maak een afspraak met <?= htmlspecialchars($lid['naam']) ?></h2>
+
+    <p>Behandeling: <?= htmlspecialchars($behandeling_naam) ?> - €<?= htmlspecialchars($behandeling_prijs) ?></p>
+
     <?php if(isset($success)) echo "<p class='success'>$success</p>"; ?>
     <?php if(isset($error)) echo "<p class='error'>$error</p>"; ?>
 
@@ -70,6 +101,8 @@ if (isset($_POST['verstuur'])) {
 
         <label for="email">E-mail:</label>
         <input type="email" id="email" name="email" placeholder="janjansen@example.com" required>
+
+        <input type="hidden" name="behandeling_id" value="<?= $behandeling_id ?>">
 
         <label for="datumtijd">Datum en Tijd:</label>
         <input type="datetime-local" id="datumtijd" name="datumtijd" required>

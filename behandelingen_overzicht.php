@@ -41,12 +41,6 @@ $result = $conn->query("SELECT * FROM behandelingen ORDER BY id ASC");
                         <td data-label="Naam"><?= htmlspecialchars($row['naam']) ?></td>
                         <td data-label="Beschrijving"><?= htmlspecialchars($row['beschrijving']) ?></td>
                         <td data-label="Prijs">€<?= htmlspecialchars($row['prijs']) ?></td>
-                        <td data-label="Foto">
-                            <?php if($row['afbeelding']): ?>
-                                <img src="<?= htmlspecialchars($row['afbeelding']) ?>" alt="Foto van <?= htmlspecialchars($row['naam']) ?>">
-                            <?php else: ?>
-                                Geen foto
-                            <?php endif; ?>
                         </td>
                         <td data-label="Acties">
                             <a href="bewerken_behandeling.php?id=<?= $row['id'] ?>">Bewerken</a>

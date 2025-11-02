@@ -1,4 +1,6 @@
-/* Algemene stijl */
+/* ===============================
+   Algemene stijl
+================================ */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -7,9 +9,10 @@ body {
   color: #333;
 }
 
+/* Header en navigatie */
 header {
   background: #ffffff;
-  padding: 30px 20px;
+  padding: 20px 0;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
@@ -26,27 +29,12 @@ header nav a {
   transition: color 0.3s;
 }
 
-
-/* Midden sectie */
-.midden {
-  background-image: url('image.png');
-  background-size: cover;
-  background-position: center;
-  color: #6b3c3c;
-  padding: 100px 20px;
-  text-align: center;
+header nav a:hover,
+header nav a.active {
+  color: #a8874d;
 }
 
-.midden h1 {
-  font-size: 2.5em;
-  margin-bottom: 20px;
-}
-
-.midden p {
-  font-size: 1.2em;
-  margin-bottom: 30px;
-}
-
+/* Knop stijl */
 .button {
   display: inline-block;
   background: #c5a572;
@@ -57,14 +45,63 @@ header nav a {
   transition: background 0.3s;
 }
 
+.button:hover {
+  background: #a8874d;
+}
 
+/* ===============================
+   Midden sectie (hero)
+================================ */
+.midden {
+  background-image: url('../afbeeldingen/kapper.png'); /* Let op: één map omhoog */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
-/* Over ons sectie */
-.midden2 {
-  background: #f9f9f9;
-  padding: 60px 20px;
+  padding: 100px 20px;
   text-align: center;
-  color: #333;
+}
+
+.midden h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #f0ecec;
+}
+
+.midden p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  color:#f0ecec; ;
+}
+
+/* ===============================
+   Midden2 sectie (over ons) met achtergrond
+================================ */
+.midden2 {
+  position: relative;
+  text-align: center;
+  color: #fff;
+  padding: 120px 20px;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.midden2::before {
+  content: "";
+  position: absolute;
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(226, 217, 217, 0.4); /* overlay voor leesbaarheid */
+  z-index: 0;
+}
+
+.midden2 h1,
+.midden2 h2,
+.midden2 p,
+.midden2-fotos {
+  position: relative;
+  z-index: 1;
 }
 
 .midden2 h1 {
@@ -76,18 +113,18 @@ header nav a {
 .midden2 h2 {
   font-size: 24px;
   margin-bottom: 30px;
-  color: #555;
+ color: #000;
 }
 
-.midden2 h3 {
+.midden2 p {
   font-size: 18px;
-  line-height: 1.6;
   max-width: 800px;
   margin: 0 auto 40px auto;
-  color: #333;
+  line-height: 1.6;
+  color: #000;
 }
 
-/* Foto's in Over ons sectie */
+/* Foto's midden2 */
 .midden2-fotos {
   display: flex;
   flex-wrap: wrap;
@@ -99,7 +136,7 @@ header nav a {
   width: 250px;
   height: auto;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   transition: transform 0.3s;
 }
 
@@ -107,29 +144,19 @@ header nav a {
   transform: scale(1.05);
 }
 
-/* Responsive voor mobiel */
-@media (max-width: 768px) {
-  .midden2 h1 {
-    font-size: 28px;
-  }
-  .midden2 h2 {
-    font-size: 20px;
-  }
-  .midden2 h3 {
-    font-size: 16px;
-  }
-  .midden2-fotos {
-    flex-direction: column;
-    align-items: center;
-  }
-  .midden2-fotos img {
-    width: 80%;
-  }
+/* ===============================
+   Behandelingen sectie
+================================ */
+.behandelingen {
+  padding: 60px 20px;
+  background: #f9f9f9;
+  text-align: center;
 }
 
-
-
-
+.behandelingen h1 {
+  font-size: 36px;
+  margin-bottom: 40px;
+}
 
 .behandelingen-container {
   display: flex;
@@ -138,61 +165,49 @@ header nav a {
   gap: 30px;
 }
 
-.behandelingen {
-  padding: 10px 10px;
-  background: #f9f9f9;
-  text-align: center;
-}
-
 .behandeling {
   background: #ffffff;
-  padding: 80px;
+  padding: 20px;
   width: 280px;
   text-align: left;
   color: #000;
-
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-
-.behandelingen h1 {
-  font-size: 40px;
-  margin-bottom: 50px;
-  color: #000000;
-}
-
 
 .behandeling h2 {
-  color: #000000;
   margin-bottom: 10px;
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .behandeling p {
   font-size: 16px;
-  line-height: 1.5;
   margin-bottom: 10px;
 }
 
 .behandeling .prijs {
   font-weight: bold;
-  color: #000000;
-  font-size: 18px;
   margin-bottom: 15px;
 }
 
-.behandeling .button {
+/* ===============================
+   Team sectie
+================================ */
+.team {
+  padding: 60px 20px;
   text-align: center;
-  display: block;
-  margin-top: 10px;
 }
 
+.team h1 {
+  font-size: 36px;
+  margin-bottom: 40px;
+}
 
-/* Teamleden stijl */
 .team-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
-  padding: 20px 0;
 }
 
 .teamlid {
@@ -221,64 +236,25 @@ header nav a {
 .teamlid h2 {
   font-size: 20px;
   margin: 5px 0;
-  color: #333;
 }
 
 .teamlid h3 {
   font-size: 16px;
   font-weight: normal;
-  color: #555;
-  margin-bottom: 10px;
 }
 
-.teamlid .button {
-  display: inline-block;
-  background: #c5a572;
-  color: #fff;
-  text-decoration: none;
-  padding: 8px 15px;
-  border-radius: 4px;
-  font-size: 14px;
-  transition: background 0.3s;
-}
-
-.teamlid .button:hover {
-  background: #a8874d;
-}
-
-/* Responsive voor mobiel */
-@media (max-width: 768px) {
-  .team-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .teamlid {
-    width: 90%;
-  }
-
-  .teamlid img {
-    width: 100%;
-    height: auto;
-  }
-}
-
-
-
-
-
-/* Reviews sectie */
+/* ===============================
+   Reviews sectie
+================================ */
 .reviews {
   background: #fff7e6;
   padding: 60px 20px;
   text-align: center;
-  color: #333;
 }
 
 .reviews h1 {
   font-size: 36px;
   margin-bottom: 40px;
-  color: #000;
 }
 
 .reviews-container {
@@ -294,29 +270,17 @@ header nav a {
   width: 300px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-
 }
 
 .review h3 {
   margin-top: 15px;
   font-weight: bold;
-  font-style: normal;
   color: #c5a572;
 }
 
-/* Responsive voor mobiel */
-@media (max-width: 768px) {
-  .reviews-container {
-    flex-direction: column;
-    align-items: center;
-  }
-  .review {
-    width: 90%;
-  }
-}
-
-
-/* Footer */
+/* ===============================
+   Footer
+================================ */
 footer {
   background: #c5a572;
   color: #fff;
@@ -329,29 +293,42 @@ footer h3 {
   font-size: 22px;
 }
 
-footer p {
-  margin: 5px 0 15px 0;
-  line-height: 1.5;
-  font-size: 18px;
-}
-
-/* Responsiveness */
+/* ===============================
+   Responsive
+================================ */
 @media (max-width: 768px) {
   header nav {
     flex-direction: column;
     gap: 15px;
   }
-  .midden {
+  .midden, .midden2 {
     padding: 80px 15px;
   }
-  .midden h1 {
-    font-size: 2em;
+  .midden h1, .midden2 h1 {
+    font-size: 28px;
   }
-  .behandelingen-container {
+  .midden2 h2 {
+    font-size: 20px;
+  }
+  .midden2 p {
+    font-size: 16px;
+  }
+  .midden2-fotos {
     flex-direction: column;
     align-items: center;
   }
-  .behandeling {
+  .midden2-fotos img {
+    width: 80%;
+  }
+  .behandelingen-container, .team-container, .reviews-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .behandeling, .teamlid, .review {
     width: 90%;
+  }
+  .teamlid img {
+    width: 100%;
+    height: auto;
   }
 }

@@ -60,7 +60,7 @@ if(isset($_POST['verstuur'])) {
             <option value="">Kies een kapper</option>
             <option value="1">Ronaldo</option>
             <option value="4">Neymar</option>
-            <option value="5">Corleone</option>
+            <option value="14">Corleone</option>
         </select>
 
         <label for="datumtijd">Datum en Tijd:</label>
