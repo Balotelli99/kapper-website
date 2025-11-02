@@ -1,116 +1,68 @@
 <?php
-session_start();
 include 'db_connect.php';
+session_start();
 
-// ID van het teamlid uit de URL halen
-$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$id = $_GET['id'] ?? 0;
+if (!$id) die("Ongeldig teamlid ID.");
 
-if ($id <= 0) {
-    echo "Ongeldig teamlid ID.";
-    exit;
-}
 
-// Teamlid ophalen uit de database
-$stmt = $conn->prepare("SELECT * FROM team WHERE id = ?");
-$stmt->bind_param("i", $id);
-$stmt->execute();
-$result = $stmt->get_result();
-$lid = $result->fetch_assoc();
+$lid = $conn->query("SELECT * FROM team WHERE id = $id")->fetch_assoc();
+if (!$lid) die("Teamlid niet gevonden.");
 
-if (!$lid) {
-    echo "Teamlid niet gevonden.";
-    exit;
-}
 
-// Behandeling automatisch ophalen uit database op basis van teamlid
-$naam_behandeling = '';
+$behandeling_naam = ($lid['naam'] == 'Ronaldo') ? 'Knippen' : (($lid['naam'] == 'Neymar') ? 'Kleuren' : 'Baard knippen');
 
-switch ($lid['naam']) {
-    case 'Ronaldo':
-        $naam_behandeling = 'Knippen';
-        break;
-    case 'Neymar':
-        $naam_behandeling = 'Kleuren';
-        break;
-    case 'Corleone':
-        $naam_behandeling = 'Baard knippen';
-        break;
-    default:
-        $naam_behandeling = 'Knippen'; // fallback
-}
 
-// Ophalen van behandeling uit database
-$stmt_behandeling = $conn->prepare("SELECT id, naam, prijs FROM behandelingen WHERE naam = ?");
-$stmt_behandeling->bind_param("s", $naam_behandeling);
-$stmt_behandeling->execute();
-$result_behandeling = $stmt_behandeling->get_result();
-$behandeling = $result_behandeling->fetch_assoc();
+$bh = $conn->query("SELECT * FROM behandelingen WHERE naam = '$behandeling_naam'")->fetch_assoc();
 
-$behandeling_id = $behandeling['id'];
-$behandeling_naam = $behandeling['naam'];
-$behandeling_prijs = $behandeling['prijs'];
 
-// Formulier verwerken
 if (isset($_POST['verstuur'])) {
     $naam = $_POST['naam'];
     $email = $_POST['email'];
-    $datumtijd = $_POST['datumtijd'];
-    $datumtijd = str_replace("T", " ", $datumtijd); // Voor MySQL DATETIME
+    $datum = str_replace("T", " ", $_POST['datumtijd']);
 
-    $stmt2 = $conn->prepare("INSERT INTO afspraken (behandeling_id, team_id, naam, email, datum) VALUES (?, ?, ?, ?, ?)");
-    $stmt2->bind_param("iisss", $behandeling_id, $id, $naam, $email, $datumtijd);
 
-    if ($stmt2->execute()) {
-        $success = "Afspraak succesvol gemaakt!";
-    } else {
-        $error = "Er ging iets mis. Probeer het opnieuw.";
-    }
+if ($conn->query("INSERT INTO afspraken (behandeling_id, team_id, naam, email, datum)
+                  VALUES ('{$bh['id']}', '$id', '$naam', '$email', '$datum')")) {
+    echo "<span class='success'>Afspraak succesvol gemaakt!</span>";
+} else {
+    echo "<span class='error'>Er ging iets mis.</span>";
+}
+
+
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($lid['naam']) ?> - Maak Afspraak</title>
-    <link rel="stylesheet" href="style.css">
+    <title><?= $lid['naam'] ?> - Afspraak</title>
     <link rel="stylesheet" href="style/afspraak.css">
 </head>
 <body>
 
 <main class="afspraak-sectie">
-    <h1><?= htmlspecialchars($lid['naam']) ?></h1>
-    <h2><?= htmlspecialchars($lid['functie']) ?></h2>
-    <?php if(!empty($lid['foto'])): ?>
-        <img src="<?= htmlspecialchars($lid['foto']) ?>" alt="Foto van <?= htmlspecialchars($lid['naam']) ?>" style="width:200px; border-radius:10px;">
+    <h1><?= $lid['naam'] ?></h1>
+    <h2><?= $lid['functie'] ?></h2>
+    <?php if($lid['foto']): ?>
+        <img src="<?= $lid['foto'] ?>" alt="<?= $lid['naam'] ?>" style="width:200px;border-radius:10px;">
     <?php endif; ?>
-    <p><?= nl2br(htmlspecialchars($lid['beschrijving'])) ?></p>
+    <p><?= $lid['beschrijving'] ?></p>
 
     <hr>
-    <h2>Maak een afspraak met <?= htmlspecialchars($lid['naam']) ?></h2>
+    <h2>Maak een afspraak met <?= $lid['naam'] ?></h2>
+    <p>Behandeling: <?= $bh['naam'] ?> - €<?= $bh['prijs'] ?></p>
 
-    <p>Behandeling: <?= htmlspecialchars($behandeling_naam) ?> - €<?= htmlspecialchars($behandeling_prijs) ?></p>
-
-    <?php if(isset($success)) echo "<p class='success'>$success</p>"; ?>
-    <?php if(isset($error)) echo "<p class='error'>$error</p>"; ?>
+    <?= $msg ?? '' ?>
 
     <form method="POST">
-        <label for="naam">Naam:</label>
-        <input type="text" id="naam" name="naam" placeholder="Bijv. Jan Jansen" required>
-
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" placeholder="janjansen@example.com" required>
-
-        <input type="hidden" name="behandeling_id" value="<?= $behandeling_id ?>">
-
-        <label for="datumtijd">Datum en Tijd:</label>
-        <input type="datetime-local" id="datumtijd" name="datumtijd" required>
-
-        <button type="submit" name="verstuur">Afspraak Bevestigen</button>
+        <input type="text" name="naam" placeholder="Naam" required>
+        <input type="email" name="email" placeholder="E-mail" required>
+        <input type="datetime-local" name="datumtijd" required>
+        <button type="submit" name="verstuur">Bevestigen</button>
     </form>
 
-    <a href="index.php" class="terug-btn">← Terug naar hoofdpagina</a>
+    <a href="index.php" class="terug-btn">← Terug</a>
 </main>
 
 </body>

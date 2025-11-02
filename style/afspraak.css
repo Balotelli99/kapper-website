@@ -2,10 +2,10 @@
 .afspraak-sectie {
     max-width: 600px;
     margin: 80px auto;
-    background: #fff;
     padding: 2.5rem 2rem;
+    background: #fff;
     border-radius: 15px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
     text-align: center;
     font-family: 'Poppins', sans-serif;
 }
@@ -40,10 +40,10 @@ form input,
 form select,
 form textarea {
     padding: 12px;
-    border-radius: 10px;
     border: 1px solid #ccc;
+    border-radius: 10px;
     font-size: 14px;
-    transition: 0.3s;
+    transition: border-color 0.3s;
 }
 
 form input:focus,
@@ -51,19 +51,18 @@ form select:focus,
 form textarea:focus {
     border-color: #735c08;
     outline: none;
-    background-color: #fff;
 }
 
 /* Knop */
 form button {
+    padding: 14px;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
     background: #735c08;
     color: #fff;
-    border: none;
-    padding: 14px;
-    border-radius: 10px;
     cursor: pointer;
-    font-size: 15px;
-    transition: 0.3s;
+    transition: background 0.3s;
 }
 
 form button:hover {
@@ -71,26 +70,19 @@ form button:hover {
 }
 
 /* Succes / foutmelding */
-.success {
-    color: green;
-    font-weight: 500;
-}
-
-.error {
-    color: red;
-    font-weight: 500;
-}
+.success { color: green; font-weight: 500; }
+.error { color: red; font-weight: 500; }
 
 /* Terug-knop */
 .terug-btn {
     display: inline-block;
     margin-top: 15px;
-    color: #735c08;
-    text-decoration: none;
-    font-weight: 500;
     padding: 6px 12px;
+    color: #735c08;
     border: 1px solid #735c08;
     border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
 }
 
 .terug-btn:hover {

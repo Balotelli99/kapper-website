@@ -1,4 +1,4 @@
-/* Algemene instellingen */
+
 body {
     font-family: 'Poppins', sans-serif;
     background: #f8f4e3;
@@ -11,7 +11,7 @@ body {
     color: #333;
 }
 
-/* Titel */
+
 h2 {
     color: #735c08;
     font-size: 32px;
@@ -21,7 +21,7 @@ h2 {
     letter-spacing: 0.8px;
 }
 
-/* Terug knop / consistent met team */
+
 .toevoegen-btn {
     display: inline-block;
     background: linear-gradient(135deg, #a37a0f, #735c08);
@@ -42,7 +42,7 @@ h2 {
     box-shadow: 0 6px 20px rgba(115, 92, 8, 0.4);
 }
 
-/* Formulier container */
+
 .form-container {
     background: #fff;
     padding: 30px 35px;
@@ -55,7 +55,7 @@ h2 {
     animation: fadeIn 0.6s ease-out;
 }
 
-/* Inputs & textarea */
+
 input[type="text"],
 input[type="number"],
 textarea {
@@ -76,7 +76,7 @@ textarea:focus {
     outline: none;
 }
 
-/* Opslaan knop */
+
 button {
     background: linear-gradient(135deg, #a37a0f, #735c08);
     color: #fff;
@@ -96,7 +96,7 @@ button:hover {
     box-shadow: 0 8px 20px rgba(115,92,8,0.4);
 }
 
-/* Animatie */
+
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }

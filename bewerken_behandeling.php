@@ -7,12 +7,12 @@ if(!isset($_SESSION['user_id'])) {
 
 include 'db_connect.php';
 
-// Behandeling-ID ophalen
-$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$id = $_GET['id'] ?? 0;
+if(!$id) die("Geen geldig ID.");
 
-// Behandeling uit database halen
-$result = $conn->query("SELECT * FROM behandelingen WHERE id = $id");
-$row = $result->fetch_assoc();
+
+$row = $conn->query("SELECT * FROM behandelingen WHERE id=$id")->fetch_assoc();
+if(!$row) die("Behandeling niet gevonden.");
 
 $message = "";
 
@@ -21,11 +21,11 @@ if(isset($_POST['opslaan'])) {
     $beschrijving = $_POST['beschrijving'];
     $prijs = $_POST['prijs'];
 
-    $stmt = $conn->prepare("UPDATE behandelingen SET naam=?, beschrijving=?, prijs=? WHERE id=?");
-    $stmt->bind_param("ssdi", $naam, $beschrijving, $prijs, $id);
-
-    if($stmt->execute()) {
+    if($conn->query("UPDATE behandelingen SET naam='$naam', beschrijving='$beschrijving', prijs='$prijs' WHERE id=$id")) {
         $message = "<p style='color:green;'>Behandeling is bijgewerkt!</p>";
+        $row['naam'] = $naam;
+        $row['beschrijving'] = $beschrijving;
+        $row['prijs'] = $prijs;
     } else {
         $message = "<p style='color:red;'>Fout bij bijwerken!</p>";
     }
@@ -37,34 +37,26 @@ if(isset($_POST['opslaan'])) {
 <head>
     <meta charset="UTF-8">
     <title>Bewerk Behandeling</title>
-    <link rel="stylesheet" href="style/bewerkbehandeling.css"> <!-- Zelfde stijl als nieuwe behandeling -->
+    <link rel="stylesheet" href="style/bewerkbehandeling.css">
 </head>
 <body>
     <h2>Bewerk Behandeling</h2>
-
-    <!-- Terug knop -->
     <a href="behandelingen_overzicht.php" class="toevoegen-btn">← Terug naar overzicht</a>
 
-    <!-- Formulier container -->
     <div class="form-container">
         <form method="POST">
-            <!-- Naam -->
-            <label for="naam">Naam:</label>
-            <input type="text" id="naam" name="naam" value="<?= htmlspecialchars($row['naam']) ?>" required>
+<label>Naam:</label>
+  <input type="text" name="naam" value="<?= $row['naam'] ?>" required>
 
-            <!-- Beschrijving -->
-            <label for="beschrijving">Beschrijving:</label>
-            <textarea id="beschrijving" name="beschrijving" required><?= htmlspecialchars($row['beschrijving']) ?></textarea>
+  <label>Beschrijving:</label>
+ <textarea name="beschrijving" required><?= $row['beschrijving'] ?></textarea>
 
-            <!-- Prijs -->
-            <label for="prijs">Prijs (€):</label>
-            <input type="number" id="prijs" name="prijs" step="0.01" value="<?= htmlspecialchars($row['prijs']) ?>" required>
+  <label>Prijs (€):</label>
+ <input type="number" name="prijs" step="0.01" value="<?= $row['prijs'] ?>" required>
 
-            <!-- Opslaan knop -->
-            <button type="submit" name="opslaan">Opslaan</button>
-        </form>
+  <button type="submit" name="opslaan">Opslaan</button>
+</form>
 
-        <!-- Bericht -->
         <?= $message ?>
     </div>
 </body>

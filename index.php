@@ -42,19 +42,18 @@ $teamleden = $conn->query("SELECT * FROM team ORDER BY id ASC");
   </div>
 </main>
 
-<!-- Behandelingen -->
+
 <main class="behandelingen">
-  <h1>Onze Behandelingen</h1>
-  <div class="behandelingen-container">
-    <?php
-    if($behandelingen){
-      while($b = $behandelingen->fetch_assoc()){
-        echo "<div class='behandeling'>";
-        echo "<h2>".$b['naam']."</h2>";
-        echo "<p>".$b['beschrijving']."</p>";
-        echo "<p class='prijs'>Prijs: €".$b['prijs']."</p>";
-        echo "<a href='behandelingen.php?id=".$b['id']."' class='button'>Maak Afspraak</a>";
-        echo "</div>";
+<h1>Onze Behandelingen</h1>
+<div class="behandelingen-container">
+  <?php
+ if($behandelingen){
+ while($b = $behandelingen->fetch_assoc()){
+ echo "<div class='behandeling'>";  echo "<h2>".$b['naam']."</h2>";
+ echo "<p>".$b['beschrijving']."</p>";
+ echo "<p class='prijs'>Prijs: €".$b['prijs']."</p>";
+  echo "<a href='behandelingen.php?id=".$b['id']."' class='button'>Maak Afspraak</a>";
+      echo "</div>";
       }
     } else {
       echo "<p>Geen behandelingen beschikbaar.</p>";
@@ -63,24 +62,24 @@ $teamleden = $conn->query("SELECT * FROM team ORDER BY id ASC");
   </div>
 </main>
 
-<!-- Team -->
+
 <main class="team">
   <h1>Het Team</h1>
   <div class="team-container">
     <?php
-    if($teamleden){
-      while($lid = $teamleden->fetch_assoc()){
-        echo "<div class='teamlid'>";
-        echo "<h2>".$lid['naam']."</h2>";
-        if($lid['foto'] != "") {
-          echo "<img src='".$lid['foto']."' alt='Foto van ".$lid['naam']."' class='team-foto'>";
+ if($teamleden){
+  while($lid = $teamleden->fetch_assoc()){
+  echo "<div class='teamlid'>";
+ echo "<h2>".$lid['naam']."</h2>";
+ if($lid['foto'] != "") {
+   echo "<img src='".$lid['foto']."' alt='Foto van ".$lid['naam']."' class='team-foto'>";
         } else {
-          echo "<img src='afbeeldingen/default.png' alt='Geen foto beschikbaar' class='team-foto'>";
+  echo "<img src='afbeeldingen/default.png' alt='Geen foto beschikbaar' class='team-foto'>";
         }
-        echo "<h3>".$lid['functie']."</h3>";
-        echo "<p>".$lid['beschrijving']."</p>";
-        echo "<a href='team.php?id=".$lid['id']."' class='button'>Meer info</a>";
-        echo "</div>";
+   echo "<h3>".$lid['functie']."</h3>";
+  echo "<p>".$lid['beschrijving']."</p>";
+  echo "<a href='team.php?id=".$lid['id']."' class='button'>Meer info</a>";
+   echo "</div>";
       }
     } else {
       echo "<p>Geen teamleden beschikbaar.</p>";
@@ -89,15 +88,15 @@ $teamleden = $conn->query("SELECT * FROM team ORDER BY id ASC");
   </div>
 </main>
 
-<!-- Footer -->
+
 <footer>
-  <h3>Openingstijden</h3>
+<h3>Openingstijden</h3>
   <p>
-    Maandag: 09:30 - 18:00<br>
-    Dinsdag: 09:30 - 18:00<br>
-    Donderdag: 09:30 - 18:00<br>
-    Vrijdag: 09:30 - 20:00<br>
-    Zaterdag: 12:00 - 17:00
+ Maandag: 09:30 - 18:00<br>
+ Dinsdag: 09:30 - 18:00<br>
+ Donderdag: 09:30 - 18:00<br>
+ Vrijdag: 09:30 - 20:00<br>
+ Zaterdag: 12:00 - 17:00
   </p>
 
   <h3>Contact</h3>

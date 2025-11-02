@@ -7,11 +7,12 @@ if(!isset($_SESSION['user_id'])) {
 
 include 'db_connect.php';
 
-$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$id = $_GET['id'] ?? 0;
+if(!$id) die("Geen geldig teamlid.");
 
-// Haal gegevens van teamlid op
-$result = $conn->query("SELECT * FROM team WHERE id = $id");
-$row = $result->fetch_assoc();
+
+$row = $conn->query("SELECT * FROM team WHERE id=$id")->fetch_assoc();
+if(!$row) die("Teamlid niet gevonden.");
 
 $message = "";
 
@@ -19,14 +20,11 @@ if(isset($_POST['opslaan'])) {
     $naam = $_POST['naam'];
     $functie = $_POST['functie'];
     $beschrijving = $_POST['beschrijving'];
-    $foto = $_POST['foto']; // nieuwe veld voor afbeelding
+    $foto = $_POST['foto'];
 
-    $stmt = $conn->prepare("UPDATE team SET naam=?, functie=?, beschrijving=?, foto=? WHERE id=?");
-    $stmt->bind_param("ssssi", $naam, $functie, $beschrijving, $foto, $id);
-
-    if($stmt->execute()) {
+    if($conn->query("UPDATE team SET naam='$naam', functie='$functie', beschrijving='$beschrijving', foto='$foto' WHERE id=$id")) {
         $message = "<p style='color:green;'>Teamlid is bijgewerkt!</p>";
-        // Update $row zodat formulier de nieuwe waarden toont
+      
         $row['naam'] = $naam;
         $row['functie'] = $functie;
         $row['beschrijving'] = $beschrijving;
@@ -50,21 +48,21 @@ if(isset($_POST['opslaan'])) {
 
     <div class="form-container">
         <form method="POST">
-            <label for="naam">Naam:</label>
-            <input type="text" id="naam" name="naam" value="<?= htmlspecialchars($row['naam']) ?>" required>
+            <label>Naam:</label>
+            <input type="text" name="naam" value="<?= $row['naam'] ?>" required>
 
-            <label for="functie">Functie:</label>
-            <input type="text" id="functie" name="functie" value="<?= htmlspecialchars($row['functie']) ?>" required>
+            <label>Functie:</label>
+            <input type="text" name="functie" value="<?= $row['functie'] ?>" required>
 
-            <label for="beschrijving">Beschrijving:</label>
-            <textarea id="beschrijving" name="beschrijving" required><?= htmlspecialchars($row['beschrijving']) ?></textarea>
+            <label>Beschrijving:</label>
+            <textarea name="beschrijving" required><?= $row['beschrijving'] ?></textarea>
 
-            <label for="foto">Foto (bijv. 'ronaldo.png'):</label>
-            <input type="text" id="foto" name="foto" value="<?= htmlspecialchars($row['foto']) ?>">
+            <label>Foto (bijv. 'ronaldo.png'):</label>
+            <input type="text" name="foto" value="<?= $row['foto'] ?>">
 
             <?php if(!empty($row['foto'])): ?>
                 <p>Huidige afbeelding:</p>
-                <img src="<?= htmlspecialchars($row['foto']) ?>" alt="Foto van <?= htmlspecialchars($row['naam']) ?>" style="width:150px; border-radius:5px;">
+                <img src="<?= $row['foto'] ?>" alt="Foto van <?= $row['naam'] ?>" style="width:150px; border-radius:5px;">
             <?php endif; ?>
 
             <button type="submit" name="opslaan">Opslaan</button>

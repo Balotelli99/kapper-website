@@ -1,6 +1,4 @@
-/* ===============================
-   Algemene stijl
-================================ */
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -9,7 +7,7 @@ body {
   color: #333;
 }
 
-/* Header en navigatie */
+
 header {
   background: #ffffff;
   padding: 20px 0;
@@ -34,7 +32,6 @@ header nav a.active {
   color: #a8874d;
 }
 
-/* Knop stijl */
 .button {
   display: inline-block;
   background: #c5a572;
@@ -49,11 +46,9 @@ header nav a.active {
   background: #a8874d;
 }
 
-/* ===============================
-   Midden sectie (hero)
-================================ */
+
 .midden {
-  background-image: url('../afbeeldingen/kapper.png'); /* Let op: één map omhoog */
+  background-image: url('../afbeeldingen/kapper.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -74,9 +69,7 @@ header nav a.active {
   color:#f0ecec; ;
 }
 
-/* ===============================
-   Midden2 sectie (over ons) met achtergrond
-================================ */
+
 .midden2 {
   position: relative;
   text-align: center;
@@ -144,9 +137,7 @@ header nav a.active {
   transform: scale(1.05);
 }
 
-/* ===============================
-   Behandelingen sectie
-================================ */
+
 .behandelingen {
   padding: 60px 20px;
   background: #f9f9f9;
@@ -190,9 +181,6 @@ header nav a.active {
   margin-bottom: 15px;
 }
 
-/* ===============================
-   Team sectie
-================================ */
 .team {
   padding: 60px 20px;
   text-align: center;
@@ -243,9 +231,7 @@ header nav a.active {
   font-weight: normal;
 }
 
-/* ===============================
-   Reviews sectie
-================================ */
+
 .reviews {
   background: #fff7e6;
   padding: 60px 20px;
@@ -278,9 +264,7 @@ header nav a.active {
   color: #c5a572;
 }
 
-/* ===============================
-   Footer
-================================ */
+
 footer {
   background: #c5a572;
   color: #fff;
@@ -293,9 +277,7 @@ footer h3 {
   font-size: 22px;
 }
 
-/* ===============================
-   Responsive
-================================ */
+
 @media (max-width: 768px) {
   header nav {
     flex-direction: column;

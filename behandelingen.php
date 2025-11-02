@@ -2,7 +2,7 @@
 session_start();
 include 'db_connect.php';
 
-// Formulier verwerken
+
 if(isset($_POST['verstuur'])) {
     $naam = $_POST['naam'];
     $email = $_POST['email'];
@@ -10,7 +10,7 @@ if(isset($_POST['verstuur'])) {
     $team_id = $_POST['team_id'];
     $datumtijd = $_POST['datumtijd'];
 
-    // Zet T van datetime-local om naar spatie voor MySQL DATETIME
+ 
     $datumtijd = str_replace("T", " ", $datumtijd);
 
     $stmt = $conn->prepare("INSERT INTO afspraken (behandeling_id, team_id, naam, email, datum) VALUES (?, ?, ?, ?, ?)");

@@ -14,14 +14,15 @@ if(isset($_POST['opslaan'])){
     $beschrijving = $_POST['beschrijving'];
     $foto = $_POST['foto']; // Voeg foto toe
 
-    $stmt = $conn->prepare("INSERT INTO team (naam, functie, beschrijving, foto) VALUES (?,?,?,?)");
-    $stmt->bind_param("ssss", $naam, $functie, $beschrijving, $foto);
+   $sql = "INSERT INTO team (naam, functie, beschrijving, foto) 
+        VALUES ('$naam', '$functie', '$beschrijving', '$foto')";
 
-    if($stmt->execute()){
-        $message = "<p style='color:green;'>Teamlid toegevoegd!</p>";
-    } else {
-        $message = "<p style='color:red;'>Fout bij toevoegen!</p>";
-    }
+if ($conn->query($sql)) {
+    $message = "<p style='color:green;'>Teamlid toegevoegd!</p>";
+} else {
+    $message = "<p style='color:red;'>Fout bij toevoegen!</p>";
+}
+
 }
 ?>
 <!DOCTYPE html>
@@ -38,20 +39,20 @@ if(isset($_POST['opslaan'])){
 
     <div class="form-container">
         <form method="POST">
-            <label for="naam">Naam:</label>
-            <input type="text" id="naam" name="naam" placeholder="Naam" required>
+<label for="naam">Naam:</label>
+ <input type="text" id="naam" name="naam" placeholder="Naam" required>
 
-            <label for="functie">Functie:</label>
-            <input type="text" id="functie" name="functie" placeholder="Functie" required>
+ <label for="functie">Functie:</label>
+ <input type="text" id="functie" name="functie" placeholder="Functie" required>
 
-            <label for="beschrijving">Beschrijving:</label>
-            <textarea id="beschrijving" name="beschrijving" placeholder="Beschrijving" required></textarea>
+  <label for="beschrijving">Beschrijving:</label>
+ <textarea id="beschrijving" name="beschrijving" placeholder="Beschrijving" required></textarea>
 
-            <label for="foto">Foto (typ alleen bestandsnaam, bijv. 'ronaldo.png'):</label>
-            <input type="text" id="foto" name="foto" placeholder="ronaldo.png">
+  <label for="foto">Foto (typ alleen bestandsnaam, bijv. 'ronaldo.png'):</label>
+  <input type="text" id="foto" name="foto" placeholder="ronaldo.png">
 
-            <button type="submit" name="opslaan">Opslaan</button>
-        </form>
+ <button type="submit" name="opslaan">Opslaan</button>
+</form>
 
         <?= $message ?>
     </div>
