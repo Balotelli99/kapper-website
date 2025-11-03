@@ -1,6 +1,14 @@
 <?php
-session_start();
-include 'db_connect.php';
+$servername = "localhost";
+$username = "root";
+$password = ""; // 
+$dbname = "kapperwebshop";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Verbinding mislukt: " . $conn->connect_error);
+}
 
 if(isset($_POST['login'])){
     $username = $_POST['username'];
@@ -14,9 +22,10 @@ if(isset($_POST['login'])){
     if($result->num_rows > 0){
         $user = $result->fetch_assoc();
         if(password_verify($password, $user['password'])){
+            session_start();
             $_SESSION['user_id'] = $user['id'];
             header("Location: kiezen.php"); 
-            exit;
+            // exit;
         } else {
             $error = "Wachtwoord fout!";
         }

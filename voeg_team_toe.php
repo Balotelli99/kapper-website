@@ -4,7 +4,16 @@ if(!isset($_SESSION['user_id'])) {
     header("Location: login.php"); 
     exit; 
 }
-include 'db_connect.php';
+$servername = "localhost";
+$username = "root";
+$password = ""; // 
+$dbname = "kapperwebshop";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Verbinding mislukt: " . $conn->connect_error);
+}
 
 $message = '';
 

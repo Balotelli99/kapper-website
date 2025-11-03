@@ -1,6 +1,18 @@
 <?php
-include 'db_connect.php';
 
+$servername = "localhost";
+$username = "root";
+$password = ""; 
+$dbname = "kapperwebshop";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Verbinding mislukt: " . $conn->connect_error);
+}
+?>
+
+<?php
 $behandelingen = $conn->query("SELECT * FROM behandelingen ORDER BY id ASC");
 $teamleden = $conn->query("SELECT * FROM team ORDER BY id ASC");
 ?>
@@ -89,8 +101,7 @@ $teamleden = $conn->query("SELECT * FROM team ORDER BY id ASC");
 </main>
 
 
-<footer>
-<h3>Openingstijden</h3>
+<footer><h3>Openingstijden</h3>
   <p>
  Maandag: 09:30 - 18:00<br>
  Dinsdag: 09:30 - 18:00<br>

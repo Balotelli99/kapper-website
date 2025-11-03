@@ -1,6 +1,15 @@
 <?php
-include 'db_connect.php';
 session_start();
+$servername = "localhost";
+$username = "root";
+$password = ""; // 
+$dbname = "kapperwebshop";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Verbinding mislukt: " . $conn->connect_error);
+}
 
 $id = $_GET['id'] ?? 0;
 if (!$id) die("Ongeldig teamlid ID.");
