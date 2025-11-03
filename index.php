@@ -38,7 +38,7 @@ $teamleden = $conn->query("SELECT * FROM team ORDER BY id ASC");
 </header>
 
 <main class="midden">
-  <h1>Welkom bij Kapsalon Perfect Cut</h1>
+  <h1>Welkom bij Sultan's Hairstyles</h1>
   <p>Waar stijl, verzorging en ontspanning samenkomen.</p>
   <a href="afspraak.php" class="button">Maak een afspraak</a>
 </main>
